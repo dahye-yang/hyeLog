@@ -63,7 +63,7 @@ public class JoinController extends HttpServlet {
 				pointdao.save(x);
 				CouponStorage y = new CouponStorage(0,one.getId(), exp, 1);
 				coupon.save(y);
-				request.setAttribute("one", one);
+				request.setAttribute("one", one); //계정을 새로 만들어서 set
 				request.getSession().setAttribute("logonUser", one);
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/WEB-INF/view/join.jsp").forward(request, response);
