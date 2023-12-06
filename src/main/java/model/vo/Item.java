@@ -70,6 +70,11 @@ public class Item {
 	public void setItemImg(List<ItemImg> itemImg) {
 		this.itemImg = itemImg;
 	}
+	@Override
+	public String toString() {
+		return "Item [code=" + code + ", name=" + name + ", price=" + price + ", detail=" + detail + ", categoryId="
+				+ categoryId + ", itemImg=" + itemImg + "]";
+	}
 	
 	
 	

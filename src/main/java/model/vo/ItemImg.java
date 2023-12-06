@@ -3,25 +3,25 @@ package model.vo;
 public class ItemImg {
 	private int no;
 	private int code;
-	private String itemImg;
+	private String itemimgUrl;
 	
 	public ItemImg() {
 		super();
 	}
 		
 	
-	public ItemImg(int code, String itemImg) {
+	public ItemImg(int code, String itemimgUrl) {
 		super();
 		this.code = code;
-		this.itemImg = itemImg;
+		this.itemimgUrl = itemimgUrl;
 	}
 
 
-	public ItemImg(int no, int code, String itemImg) {
+	public ItemImg(int no, int code, String itemimgUrl) {
 		super();
 		this.no = no;
 		this.code = code;
-		this.itemImg = itemImg;
+		this.itemimgUrl = itemimgUrl;
 	}
 	public int getNo() {
 		return no;
@@ -35,11 +35,11 @@ public class ItemImg {
 	public void setCode(int code) {
 		this.code = code;
 	}
-	public String getItemImg() {
-		return itemImg;
+	public String getitemimgUrl() {
+		return itemimgUrl;
 	}
-	public void setItemImg(String itemImg) {
-		this.itemImg = itemImg;
+	public void setitemimgUrl(String itemimgUrl) {
+		this.itemimgUrl = itemimgUrl;
 	}
 	
 	

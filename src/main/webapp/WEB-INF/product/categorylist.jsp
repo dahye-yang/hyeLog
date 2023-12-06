@@ -15,7 +15,9 @@
 	<div>
 		<div style="display: flex; justify-content: space-between;">
 			<div>
+				<a href="${pageContext.servletContext.contextPath }/view/main">
 				<img src="${pageContext.servletContext.contextPath }/resource/image/title.jpg"/>
+				</a>
 			</div>
 			<div style="display: flex; justify-content: end">
 				<c:choose>
@@ -45,28 +47,24 @@
 				</c:choose>
 			</div>
 		</div>
-		<div style="display: flex; justify-content: space-between;">
-			<div>
-				<ul style="display: flex; justify-content: center; gap: 30px">
-					<c:forEach var="one" items="${categorys }">
-					<li><a href="${pageContext.servletContext.contextPath }/product/categorylist?categoryId=${one.id}">${one.name }</a></li>
-					</c:forEach>
-				</ul>
-			</div>
-			<div>
-				<a href="${pageContext.servletContext.contextPath }/private/myshop">
-					<img src="${pageContext.servletContext.contextPath }/resource/image/mypage.png"></a>
-				<a href="${pageContext.servletContext.contextPath }/private/order/cart">	
-					<img src="${pageContext.servletContext.contextPath }/resource/image/cart.png">
-				</a>
-			</div>
+		<div style="text-align: center;">
+			<p style="font-size: 40px;">${category.name }</p>
 		</div>
-		<br/>
-		<div> <!-- 나중에 item findAll 해서 가지고오면 확장for문으로 뽑기 -->
-			<div><img src="${pageContext.servletContext.contextPath }${img[0] }"></div>
-			<div>${item.name }</div>
-			<div>${item.detail }</div>
-			<div><fmt:formatNumber value="${item.price }" pattern="#,###"/></div>
+		<div>
+			<ul style="display: flex; justify-content: center;">
+			<c:forEach var="one" items="${itemlist }">
+				<li>
+					
+					<div>
+					<a href="${pageContext.servletContext.contextPath }/view/detail?code=${one.code}">
+					<img src="${pageContext.servletContext.contextPath }${one.itemImg[0].itemimgUrl}"></a></div>
+					<div>${one.name }</div>
+					<div>${one.detail }</div>
+					<div><fmt:formatNumber value="${one.price }" pattern="#,###"/></div> 
+					
+				</li>
+			</c:forEach>
+			</ul>
 		</div>
 	</div>
 </body>
