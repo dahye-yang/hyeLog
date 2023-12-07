@@ -9,10 +9,55 @@
 	font-size: 18pt;
 	
 }
+
+h2{
+    font-size: 40pt;
+}
 ul{
 	list-style: none;
 }
 li{
 	float: left;
 	margin-right: 5px;
+}
+
+/*정렬*/
+
+.align-center{
+	text-align:center;
+}
+
+.align-left{
+	text-align:center;
+}
+
+.align-right{
+	text-align:right;
+}
+
+/*패딩*/
+.px-1{
+	padding-left: 3px;
+	padding-right: 3px;
+}
+
+.px-2{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.px-3{
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.px-4{
+	padding-left: 12px;
+	padding-right: 12px;
+}
+
+.w{
+
+	margin:5%;
+	padding: 10px;
 }
