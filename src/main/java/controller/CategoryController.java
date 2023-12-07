@@ -28,6 +28,10 @@ public class CategoryController extends HttpServlet {
 		
 		
 		try {
+			// 카테고리 배너 띄우기 위한 코드
+			List<Category> categorys = categorydao.findAll();
+			request.setAttribute("categorys", categorys);
+			//클릭한 카테고리 별 아이템 찾기위한 코드
 			Category category = categorydao.findOne(x);
 			List<Item> itemlist = itemdao.findByCategoryId(x);
 			
@@ -36,13 +40,14 @@ public class CategoryController extends HttpServlet {
 				itemlist.get(i).setItemImg(itemImgList);
 				
 			}
-		
+			
 //			for(Item a : itemlist) {
 //				a.getItemImg()
 //				a.getItemImg().ge
 //			}
 			// item list toString으로 확인
-			//System.out.println(itemlist.toString());	
+			//System.out.println(itemlist.toString());
+			request.setAttribute("categorys", categorys);
 			request.setAttribute("category", category);
 			request.setAttribute("itemlist", itemlist);
 			request.getRequestDispatcher("/WEB-INF/product/categorylist.jsp").forward(request, response);
