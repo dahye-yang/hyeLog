@@ -49,10 +49,10 @@ public class MainController extends HttpServlet {
 			request.setAttribute("categorys", categorys);
 			
 			
+			request.getRequestDispatcher("/WEB-INF/view/main.jsp").forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("/WEB-INF/view/main.jsp").forward(request, response);
 	}
 }
