@@ -7,6 +7,9 @@ public class User {
 	private String nickName;
 	private int levelId;
 	
+	private Level level;
+	
+	
 	public User() {
 		super();
 	}
@@ -17,6 +20,17 @@ public class User {
 		this.balance = balance;
 		this.nickName = nickName;
 		this.levelId = levelId;
+	}
+	
+	
+	public User(String id, String password, int balance, String nickName, int levelId, Level level) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.balance = balance;
+		this.nickName = nickName;
+		this.levelId = levelId;
+		this.level = level;
 	}
 	public String getId() {
 		return id;
@@ -48,7 +62,12 @@ public class User {
 	public void setLevelId(int levelId) {
 		this.levelId = levelId;
 	}
-	
+	public Level getLevel() {
+		return level;
+	}
+	public void setLevel(Level level) {
+		this.level = level;
+		}
 	
 	
 }

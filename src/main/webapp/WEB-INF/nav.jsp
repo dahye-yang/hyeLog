@@ -18,7 +18,7 @@
 								href="${pageContext.servletContext.contextPath }/private/myshop">MYPAGE</a></li>
 							<li><a href="#">CART</a></li>
 							<li><a href="#">NOTICE</a></li>
-							<li><a href="#">Q&A</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/board/qna">Q&A</a></li>
 							<li><a
 								href="${pageContext.servletContext.contextPath }/view/reviewmain">REVIEW</a></li>
 						</ul>
@@ -32,7 +32,7 @@
 							<li><a
 								href="${pageContext.servletContext.contextPath }/view/join">JOIN</a></li>
 							<li><a href="#">NOTICE</a></li>
-							<li><a href="#">Q&A</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/board/qna">Q&A</a></li>
 							<li><a
 								href="${pageContext.servletContext.contextPath }/view/reviewmain">REVIEW</a></li>
 						</ul>
