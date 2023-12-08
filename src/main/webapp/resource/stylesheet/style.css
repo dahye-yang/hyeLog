@@ -3,38 +3,57 @@
 
 * {
 	color: #444444;
-	margin : 0px;
+	margin: 0px;
 	line-height: 1.5;
 	font-family: 'Dongle', sans-serif;
 	font-size: 18pt;
-	
+	box-sizing: border-box;
 }
-ul{
+
+a {
+	display : inline-block;
+}
+
+ul {
 	list-style: none;
 }
-li{
+
+li {
 	float: left;
 	margin-right: 5px;
 }
 
-.wrap{
+.wrap {
 	margin: auto;
 	max-width: 1340px;
 	min-height: 100vh;
 }
 
-button{
+button {
 	padding-left: 30px;
 	padding-right: 30px;
 }
 
-table,tr,td{
+table,
+tr,
+td {
 	border: 1px solid #444444;
 	border-collapse: separate;
 	border-radius: 8px;
 }
-textarea, input{
+
+textarea,
+input {
 	border: 0;
 	resize: none;
 	outline: none;
+}
+
+.textcenter {
+	text-align: center;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: inner-spin-button;
+    opacity: 1;
 }

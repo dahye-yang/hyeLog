@@ -27,8 +27,6 @@ public class ItemDetailController extends HttpServlet {
 		String code = request.getParameter("code"); // item 클릭시 넘겨주는 item.code
 		int x = Integer.parseInt(code);
 		
-		System.out.println("code--->"+ code);
-		
 		ItemDao itemdao = new ItemDao();
 		ReviewDao reviewdao = new ReviewDao();
 

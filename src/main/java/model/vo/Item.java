@@ -10,6 +10,7 @@ public class Item {
 	private int categoryId;
 	
 	private List<ItemImg> itemImg;
+	private String image;
 	
 	public Item() {
 		super();
@@ -25,6 +26,13 @@ public class Item {
 	
 	
 
+	public Item(String name, int price, int categoryId, String image) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.categoryId = categoryId;
+		this.image = image;
+	}
 	public Item(int code, String name, int price, String detail, int categoryId, List<ItemImg> itemImg) {
 		super();
 		this.code = code;
@@ -74,6 +82,12 @@ public class Item {
 	public String toString() {
 		return "Item [code=" + code + ", name=" + name + ", price=" + price + ", detail=" + detail + ", categoryId="
 				+ categoryId + ", itemImg=" + itemImg + "]";
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

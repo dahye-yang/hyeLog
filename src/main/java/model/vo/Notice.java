@@ -7,18 +7,16 @@ public class Notice {
 	private String title;
 	private String message;
 	private Date noticeDate;
-	private int viewCnt;
 	
 	public Notice() {
 		super();
 	}
-	public Notice(int id, String title, String message, Date noticeDate, int viewCnt) {
+	public Notice(int id, String title, String message, Date noticeDate) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.message = message;
 		this.noticeDate = noticeDate;
-		this.viewCnt = viewCnt;
 	}
 	public int getId() {
 		return id;
@@ -44,12 +42,6 @@ public class Notice {
 	public void setNoticeDate(Date noticeDate) {
 		this.noticeDate = noticeDate;
 	}
-	public int getViewCnt() {
-		return viewCnt;
-	}
-	public void setViewCnt(int viewCnt) {
-		this.viewCnt = viewCnt;
-	}
-	
+
 	
 }

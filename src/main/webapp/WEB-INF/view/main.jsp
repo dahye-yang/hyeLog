@@ -13,12 +13,28 @@
 </head>
 <body>
 	<div class="wrap">
-		<c:import url="/nav" />
-		<div> <!-- 나중에 item findAll 해서 가지고오면 확장for문으로 뽑기 -->
-			<div><img src="${pageContext.servletContext.contextPath }${img[0] }"></div>
-			<div>${item.name }</div>
-			<div>${item.detail }</div>
-			<div><fmt:formatNumber value="${item.price }" pattern="#,###"/></div>
+		<div>
+			<c:import url="/nav" />
+		</div>
+		<div>
+			<ul style="display: flex; justify-content: center; padding:0; flex-wrap: wrap;">
+				<c:forEach var="one" items="${itemlist }">
+					<li style="width:33.3%; margin:0;  padding:15px;">
+						<div>
+							<a
+								href="${pageContext.servletContext.contextPath }/view/detail?code=${one.code}">
+								<img style="width: 100%" src="${pageContext.servletContext.contextPath }${one.itemImg[0].itemimgUrl}">
+							</a>
+						</div>
+						<div><a style="text-decoration: none;" href="${pageContext.servletContext.contextPath }/view/detail?code=${one.code}">
+						${one.name }</a></div>
+						<div>${one.detail }</div>
+						<div>
+							<fmt:formatNumber value="${one.price }" pattern="#,###" />
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
 		</div>
 	</div>
 </body>

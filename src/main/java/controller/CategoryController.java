@@ -41,10 +41,6 @@ public class CategoryController extends HttpServlet {
 				
 			}
 			
-//			for(Item a : itemlist) {
-//				a.getItemImg()
-//				a.getItemImg().ge
-//			}
 			// item list toString으로 확인
 			//System.out.println(itemlist.toString());
 			request.setAttribute("categorys", categorys);

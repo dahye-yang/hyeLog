@@ -15,38 +15,45 @@
 </head>
 <body>
 	<div class="wrap">
-		<c:import url="/nav" />
-		<div
-			style="display: flex; justify-content: center; padding-bottom: 100px; padding-top: 60px">
+		<div>
+			<c:import url="/nav" />
+		</div>
+		<div style="display: flex; justify-content: center; padding-bottom: 100px; padding-top: 60px">
 			<div>
-				<img
+				<img id="viewImage"
 					src="${pageContext.servletContext.contextPath }${item.itemImg[0].itemimgUrl}">
 			</div>
-			<div style="text-align: left; padding-left: 88px">
-				<div style="margin-bottom: 20px">
-					<b>${item.name }</b>
-				</div>
-				<div>${item.detail }</div>
-				<hr />
-				<div style="margin-top: 20px">
-					판매가 :
-					<fmt:formatNumber value="${item.price }" pattern="#,###" />
-				</div>
-				<div style="margin-bottom: 5px">
-					구매수량 : <input type="number" value="0" id="piece">
-				</div>
-				<hr />
-				<div
-					style="margin-top: 20px; display: flex; justify-content: space-between;">
-					<div>
-						<b>Total Price : </b>
+			<form action="${pageContext.servletContext.contextPath }/private/order/cart">
+				<div style="text-align: left; padding-left: 88px">
+					<div style="margin-bottom: 20px">
+						<b>${item.name }</b>
 					</div>
-					<div>26,000원</div>
+					<div>${item.detail }</div>
+					<hr />
+					<div style="margin-top: 20px">
+						판매가 :
+						<span id="price"><fmt:formatNumber value="${item.price }" pattern="#,###" /></span>
+					</div>
+					<div style="margin-bottom: 5px">
+						구매수량 : <input id="itempiece" type="number" value="0" name="itempiece" style="width: 50px" class="textcenter">
+					</div>
+					<hr />
+					<div
+						style="margin-top: 20px; display: flex; justify-content: space-between;">
+						<div>
+							<b>Total Price : </b>
+						</div>
+						<div><span id="total">0</span>원</div>
+					</div>
+					<div>
+						<div>
+							<button type="button">구매하기</button>
+							<button id="cart" type="button">장바구니</button>
+							<button type="button">찜콩하기</button>	
+						</div>		
+					</div>
 				</div>
-				<div style="display: flex; justify-content: space-between;">
-					<a>구매하기</a> <a>장바구니</a> <a>찜콩하기</a>
-				</div>
-			</div>
+			</form>		
 		</div>
 		<div>
 			<div style="padding-bottom: 50px">
@@ -56,7 +63,7 @@
 				<div style="text-align: center">
 					<c:forEach var="one" items="${item.itemImg }">
 						<div>
-							<img
+							<img class="images"
 								src="${pageContext.servletContext.contextPath }${one.itemimgUrl}">
 						</div>
 					</c:forEach>
@@ -119,5 +126,56 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		
+		let $price = document.querySelector('#price');
+		let $price2 = $price.innerHTML;
+		let $y = $price2.replace(',','');
+		//console.log($y);
+		let $test = document.querySelector('#total')
+		console.log($test.firstChild);
+		
+		document.querySelector('#itempiece').addEventListener('change', function(e){
+			let $x = document.getElementById('itempiece').value; // 선택한 상품의 개수
+				
+			if($x > 20){
+				document.getElementById('itempiece').value = '20';
+				window.alert("최대 주문 수량은 20개입니다.");
+			}
+		
+			let $total = $x * $y;
+			let $totalprice = $total.toLocaleString();
+			$test.firstChild.data=$totalprice;
+			
+		});
+		document.querySelector('#itempiece').addEventListener('input', function(e){
+			let $x = document.getElementById('itempiece').value; // 선택한 상품의 개수
+			if($x < 0){
+				document.getElementById('itempiece').value = '0';
+				window.alert("최소 주문 수량은 1개입니다.");
+			}
+			
+		});
+		$images = [...document.querySelectorAll(".images")].map(function(e) {
+			return e.src;
+		});
+		
+		setInterval(function() {
+			const first = $images.shift();
+			$images.push(first);
+			document.querySelector("#viewImage").src = first;
+		}, 3000);
+		
+		
+		document.querySelector('#cart').addEventListener('click', function(e){
+			let $x = document.getElementById('itempiece').value; // 선택한 상품의 개수
+			if($x != 0){
+				location.href="${pageContext.servletContext.contextPath}/private/order/cart?piece="+$x+"&itemcode="+${item.code};			
+			}else{
+				window.alert("필수 옵션을 선택해주세요!");
+			}
+			
+		});
+	</script>
 </body>
 </html>

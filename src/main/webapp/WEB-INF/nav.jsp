@@ -12,29 +12,23 @@
 				<c:when test="${found ne null }">
 					<div>
 						<ul style="display: flex; justify-content: space-between;">
-							<li><a
-								href="${pageContext.servletContext.contextPath }/private/logout">LOGOUT</a></li>
-							<li><a
-								href="${pageContext.servletContext.contextPath }/private/myshop">MYPAGE</a></li>
-							<li><a href="#">CART</a></li>
-							<li><a href="#">NOTICE</a></li>
-							<li><a href="#">Q&A</a></li>
-							<li><a
-								href="${pageContext.servletContext.contextPath }/view/reviewmain">REVIEW</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/private/logout">LOGOUT</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/private/myshop">MYPAGE</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/private/order/cartmain">CART</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/view/noticemain">NOTICE</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/board/qna">Q&A</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/view/reviewmain">REVIEW</a></li>
 						</ul>
 					</div>
 				</c:when>
 				<c:otherwise>
 					<div>
 						<ul style="display: flex; justify-content: space-between;">
-							<li><a
-								href="${pageContext.servletContext.contextPath }/view/login">LOGIN</a></li>
-							<li><a
-								href="${pageContext.servletContext.contextPath }/view/join">JOIN</a></li>
-							<li><a href="#">NOTICE</a></li>
-							<li><a href="#">Q&A</a></li>
-							<li><a
-								href="${pageContext.servletContext.contextPath }/view/reviewmain">REVIEW</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/view/login">LOGIN</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/view/join">JOIN</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/view/noticemain">NOTICE</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/board/qna">Q&A</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/view/reviewmain">REVIEW</a></li>
 						</ul>
 					</div>
 				</c:otherwise>

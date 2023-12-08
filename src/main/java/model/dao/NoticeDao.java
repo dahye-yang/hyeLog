@@ -9,33 +9,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.vo.Notice;
-import model.vo.Review;
 
 public class NoticeDao {
-	public boolean save(Notice one) throws ClassNotFoundException {
+	public int save(Notice one) throws ClassNotFoundException {
 
-		boolean result = false;
+		int result = -1;
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
 				"1111");) {
 
-			String sql = String.format("insert into notices values(NOTICES_SEQ.NEXTVAL,?,?,?,?)");
+			String sql = String.format("insert into notices values(NOTICES_SEQ.NEXTVAL,?,?,?)");
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, one.getTitle());
 			pstmt.setString(2, one.getMessage());
 			pstmt.setDate(3, one.getNoticeDate());
-			pstmt.setInt(4, one.getViewCnt());
 
 			int n = pstmt.executeUpdate();
 
 			if (n == 1) {
-				result = true;
+				
 				System.out.println("executeUpdate ==> " + n);
+				String str = "SELECT notices_seq.currval from dual";
+				PreparedStatement pstmt2 = conn.prepareStatement(str);
+				ResultSet rs = pstmt2.executeQuery();
+				
+				rs.next();
+				result = rs.getInt("currval");
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = false;
+			result = -1;
 		}
 		return result;
 	}
@@ -57,9 +62,8 @@ public class NoticeDao {
 				String title = rs.getString("title");
 				String message = rs.getString("message");
 				Date noticeDate = rs.getDate("notice_date");
-				int viewCnt = rs.getInt("view_cnt");
 
-				Notice one = new Notice(id, title, message, noticeDate, viewCnt);
+				Notice one = new Notice(id, title, message, noticeDate);
 
 				list.add(one);
 			}
@@ -77,13 +81,12 @@ public class NoticeDao {
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
 				"1111");) {
 
-			String sql = "UPDATE notices SET TITLE=?, MESSAGE=?, NOTICE_DATE =?, VIEW_CNT=? WHERE ID=? ";
+			String sql = "UPDATE notices SET TITLE=?, MESSAGE=?, NOTICE_DATE =? WHERE ID=? ";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, one.getTitle());
 			pstmt.setString(2, one.getMessage());
 			pstmt.setDate(3, one.getNoticeDate());
-			pstmt.setInt(4, one.getViewCnt());
-			pstmt.setInt(5, one.getId());
+			pstmt.setInt(4, one.getId());
 
 
 			int n = pstmt.executeUpdate();
@@ -122,4 +125,34 @@ public class NoticeDao {
 		return result;
 	}
 	
+public Notice findById(int idKey) throws ClassNotFoundException {
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+
+		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
+				"1111");) {
+
+			String sql = "SELECT * FROM Notices WHERE ID = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idKey);			
+
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int id = rs.getInt("id");
+				String title = rs.getString("title");
+				String message = rs.getString("message");
+				Date noticeDate = rs.getDate("notice_date");
+				
+			
+				return new Notice(id, title, message, noticeDate);
+			} else {
+				return null;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 }
