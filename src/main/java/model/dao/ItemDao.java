@@ -57,47 +57,6 @@ public class ItemDao {
 		}
 
 	}
-	// 카테고리 별로 item과 item_img 가지고오늘 dao
-//	public List<Item> findByCodeForCategoryList(int itemCode) throws ClassNotFoundException {
-//
-//		Class.forName("oracle.jdbc.driver.OracleDriver");
-//
-//		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
-//				"1111");) {
-//
-//			String sql = "SELECT a.*,b.item_img from (select i.* from items i join categorys c on i.category_id=c.id "
-//					+ "where i.category_id = ?) a join item_imgs b on a.code = b.code "
-//					+ "order by b.no desc";
-//			PreparedStatement pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, itemCode);
-//			
-//			Item item = null;
-//			List<Item> itemlist = new ArrayList<>();
-//			
-//			ResultSet rs = pstmt.executeQuery();
-//			while (rs.next()) {
-//				item = new Item();
-//				item.setCode(rs.getInt("code"));
-//				item.setName(rs.getString("name"));
-//				item.setPrice(rs.getInt("price"));
-//				item.setDetail(rs.getString("detail"));
-//				item.setCategoryId(rs.getInt("category_id"));
-//				
-//				List<ItemImg> list = new ArrayList<>();
-//				ItemImg img = new ItemImg();
-//				img.setItemImg(rs.getString("item_img"));
-//				list.add(img);
-//				
-//				item.setItemImg(list);
-//				itemlist.add(item);
-//			}
-//			return itemlist;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//
-//	}
 	
 	 // 카테고리 click 하면 category_id parameter로 넘겨주어서 해당 카테고리 item 가져오기 
 	public List<Item> findByCategoryId(String one) throws ClassNotFoundException {
@@ -153,5 +112,33 @@ public class ItemDao {
 			return null;
 		}
 
+	}
+	
+	public List<Item> findAll() throws ClassNotFoundException {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+
+		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
+				"1111");) {
+
+			String sql = "SELECT * FROM items";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+
+			ResultSet rs = pstmt.executeQuery();
+			List<Item> list = new ArrayList<Item>();
+			
+			while (rs.next()) {
+				Item item = new Item();
+				item.setCode(rs.getInt("code"));
+				item.setName(rs.getString("name"));
+				item.setPrice(rs.getInt("price"));
+				item.setDetail(rs.getString("detail"));
+
+				list.add(item);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

@@ -21,12 +21,12 @@
 			</div>
 		</div>
 		<div>
-			<form action="${pageContext.servletContext.contextPath }/board/notice" method="post">
-			<input type="hidden" name="regidate" value="${now }">
+			<form action="${pageContext.servletContext.contextPath }/board/noticefix" method="post">
+			<input type="hidden" name="id" value="${noticeone.id }">
 				<table style="width: 70%;margin: auto">
 					<tr>
 						<td class="textcenter">제목</td>
-						<td><input type="text" name="title"></td>
+						<td><input type="text" name="title" value="${noticeone.title }"></td>
 					</tr>
 					<tr>
 						<td class="textcenter">작성자</td>
@@ -34,12 +34,12 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<textarea name="message" rows="3" cols="80"></textarea>
+							<textarea name="message" rows="3" cols="80">${noticeone.message }</textarea>
 						</td>
 					</tr>
 				</table>
 				<div style="text-align: center; padding-top: 20px">
-					<button type="submit">등록하기</button>
+					<button type="submit">수정하기</button>
 				</div>
 			</form>
 		</div>

@@ -73,13 +73,24 @@ button {
 table,
 tr,
 td {
-  border: 1px solid #444444;
-  border-collapse: separate;
-  border-radius: 8px;
+	border: 1px solid #444444;
+	border-collapse: separate;
+	border-radius: 8px;
 }
+
 textarea,
 input {
-  border: 0;
-  resize: none;
-  outline: none;
+	border: 0;
+	resize: none;
+	outline: none;
+
+}
+
+.textcenter {
+	text-align: center;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: inner-spin-button;
+    opacity: 1;
 }

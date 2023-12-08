@@ -48,7 +48,15 @@ public class MainController extends HttpServlet {
 			List<Category> categorys = categorydao.findAll();
 			request.setAttribute("categorys", categorys);
 			
+			//아이템 다 가지고오기
+			List<Item> itemlist = itemdao.findAll();
 			
+			for(int i =0; i < itemlist.size(); i++) {
+				List<ItemImg> itemImgList = itemdao.findByImg(itemlist.get(i).getCode());
+				itemlist.get(i).setItemImg(itemImgList);
+			}
+			
+			request.setAttribute("itemlist", itemlist);
 			request.getRequestDispatcher("/WEB-INF/view/main.jsp").forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace();
