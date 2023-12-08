@@ -199,7 +199,6 @@ public class QnaDao {
 		}
 	}
 	
-
 	public boolean deletById(int id) throws ClassNotFoundException {
 		boolean result = false;
 		Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -207,7 +206,7 @@ public class QnaDao {
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
 				"1111");) {
 
-			String sql = "DELETE FROM Qnas WHERE ID = ? ";
+			String sql = "DELETE FROM Qnas WHERE id = ? ";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
 

@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dao.QnaDao;
 import model.vo.Qna;
+import model.vo.User;
 
 @WebServlet("/board/qna")
 public class QnaController extends HttpServlet {
@@ -22,6 +23,9 @@ public class QnaController extends HttpServlet {
 			
 						
 			request.setAttribute("list", list);
+			
+			User found = (User) request.getSession().getAttribute("logonUser");
+			request.setAttribute("found", found);
 
 			
 		} catch (ClassNotFoundException e) {
@@ -29,9 +33,8 @@ public class QnaController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-			request.getRequestDispatcher("/WEB-INF/board/qna.jsp").forward(request, response);
-		
-		}
+		request.getRequestDispatcher("/WEB-INF/board/qna.jsp").forward(request, response);
+	}
 
 	
 

@@ -11,7 +11,6 @@
 </head>
 <body>
 
-<%@ include file="/WEB-INF/nav/private.jsp" %>
 
 <br>
 <h2>

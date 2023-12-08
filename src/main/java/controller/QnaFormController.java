@@ -28,6 +28,8 @@ public class QnaFormController extends HttpServlet {
 			exist = true;
 			request.setAttribute("exist", exist);
 		}
+		request.setAttribute("one", one);
+		System.out.println(one.getNickName());
 
 		QnaCategoryDao qnaCategoryDao = new QnaCategoryDao();
 		try {
@@ -48,13 +50,16 @@ public class QnaFormController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		User one = (User) request.getSession().getAttribute("logonUser");
+		
 		String qnaType = request.getParameter("qnaType");
 		String[] T = qnaType.split("\\.");
 		System.out.println("받은 t값" + T.toString());
 		String t = T[0];
 		int qnaCate = Integer.parseInt(t);
 
-		String writer = request.getParameter("writer");
+		String writer = one.getNickName();
 
 		String title = request.getParameter("title");
 
@@ -73,28 +78,20 @@ public class QnaFormController extends HttpServlet {
 
 		Qna qna = new Qna(0, writer, title, question, now, viewCnt, answer, openType, qnaCate);
 		QnaDao qnaDao = new QnaDao();
-		try {
-			qnaDao.save(qna);
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		String id = request.getParameter("id");
-		
-		int i = Integer.parseInt(id);
-		boolean result;
-		try {
-			result = qnaDao.deletById(i);
-			if(result) {
-				response.sendRedirect(request.getServletContext().getContextPath() + "/board/qna");
+		boolean SaveResult = false;
+	
+			try {
+				SaveResult = qnaDao.save(qna);
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			
+			
+		if(SaveResult) {
+			response.sendRedirect(request.getServletContext().getContextPath() + "/board/qna");
+		}else {
 		request.getRequestDispatcher("/WEB-INF/board/qnaForm.jsp").forward(request, response);
+	
 	}
-}
+	}}
