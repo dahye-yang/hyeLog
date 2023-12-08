@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import model.vo.Level;
 import model.vo.User;
 
 public class UserDao {
@@ -118,5 +119,48 @@ public class UserDao {
 			result = false;
 		}
 		return result;
+	}
+	
+	public User findUserWithlevelImgByUserId(String key) throws ClassNotFoundException { 
+		
+		// 1. DB 연결
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
+				"1111");) {
+
+			// 2. 처리할 쿼리 작성 후 전송가능한 객체로 준비
+			String sql = "select u.*,l.level_img from users u left join levels l on u.level_id = l.id where u.id=?";
+			// PK의 경우에는 하나 또는 없음이 나오기 때문에 if문 사용
+			PreparedStatement pstmt = conn.prepareStatement(sql);			
+			
+			pstmt.setString(1, key);
+
+			// 3. 실행후 응답 받기
+			ResultSet rs = pstmt.executeQuery();
+			// ResultSet 사용하는 거는.. Iterator 쓰는 방법이랑 비슷함.
+			// boolean r = rs.next();
+			if (rs.next()) {
+				User user = new User();
+				user.setId( rs.getString("id")); 
+				user.setPassword(rs.getString("password"));
+				user.setBalance(rs.getInt("balance"));
+				user.setNickName(rs.getString("nickname"));
+				user.setLevelId(rs.getInt("level_id"));
+				
+				Level l = new Level();
+					
+					l.setLevelImg(rs.getString("level_img"));
+				
+				user.setLevel(l);
+				
+				return user;
+				
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

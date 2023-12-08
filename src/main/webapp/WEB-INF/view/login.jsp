@@ -4,14 +4,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="${pageContext.servletContext.contextPath }
+			/resource/stylesheet/style.css" rel = "stylesheet"></link>
 <meta charset="UTF-8">
 <meta name = "viewport" content="width=divice-width, initial-scale=1.0">
 <title>HyeLog</title>
 </head>
 <body>
-	<div style="max-width: 960px; margin: auto">
+<div class="wrap">
+<c:import url="/nav" />
+	<div class="wrap" style="max-width: 960px; margin: auto">
 		<div style="width: 360px; text-align: center; margin: auto">
-			<h1>HyeLog</h1>
 			<h2>Login - hyelog</h2>
 		</div>
 		
@@ -32,12 +35,13 @@
 				<div style="padding: 5px">
 					<div>✔️ PASSWORD</div>
 					<input class="width100" type="password" name="loginPassword" />
-				
+				</div>
 				<div style="text-align: center">
 					<button style="width: 150px" type="submit">로그인</button>
 				</div>
 			</form>
 		</div>
 	</div>
+</div>
 </body>
 </html>
