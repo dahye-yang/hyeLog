@@ -13,7 +13,7 @@
 <body>
 <h2> Q&A작성 </h2>
 
-<form action = "${pageContext.servletContext.contextPath }/board/qna" method="post">
+<form action = "${pageContext.servletContext.contextPath }/board/qnaForm" method="post">
 	<table>
 		<tr>
 			<th>문의 분류</th>
@@ -21,7 +21,7 @@
 			<div>
 				<select name="qnaType">
 					<c:forEach var="one" items="${list}">
-						<option >${one.name}</option>
+						<option >${one.id}.${one.name}</option>
 					</c:forEach>
 				</select>
 			</div>
@@ -53,8 +53,8 @@
 		
 		<tr>
 		<td>
-		<input type="radio" name="check" value="show" id="show"/><label for="show">공개</label></td>
-		<td><input type="radio" name="check" value="secret" id="secret"/><label for="secret">비공개</label></td>
+		<input type="radio" name="check" value="1" id="show"/><label for="show">공개</label></td>
+		<td><input type="radio" name="check" value="2" id="secret"/><label for="secret">비공개</label></td>
 		</tr>
 		
 		<tr >
@@ -62,7 +62,7 @@
 		</tr>
 		
 	</table>
-		<button>등록</button> <button type ="button">취소</button>
+		<button>등록</button> <button type ="reset">취소</button>
 	
 </form>
 

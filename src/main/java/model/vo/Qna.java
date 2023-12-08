@@ -11,6 +11,7 @@ public class Qna {
 	private Date regiDate;
 	private int viewCnt;
 	private String answer;
+	private int openType;
 	private int qnaCate;
 	
 	private QnaCategory qnaCategory;
@@ -18,22 +19,41 @@ public class Qna {
 	public Qna() {
 		super();
 	}
+	
+	
+	
 
-	public Qna(int id, String writer, String title, String question, Date regiDate, int viewCnt, String answer,
-			int qnaCate) {
+	public Qna(int id, String writer, String title, String question, Date regiDate, int openType, int qnaCate) {
 		super();
 		this.id = id;
 		this.writer = writer;
 		this.title = title;
 		this.question = question;
 		this.regiDate = regiDate;
-		this.viewCnt = viewCnt;
-		this.answer = answer;
+		this.openType = openType;
 		this.qnaCate = qnaCate;
 	}
 
+
+
+
+	public Qna(String writer, String title, String question, Date regiDate, int viewCnt, String answer, int openType,
+			int qnaCate) {
+		super();
+		this.writer = writer;
+		this.title = title;
+		this.question = question;
+		this.regiDate = regiDate;
+		this.viewCnt = viewCnt;
+		this.answer = answer;
+		this.openType = openType;
+		this.qnaCate = qnaCate;
+	}
+	
+
+
 	public Qna(int id, String writer, String title, String question, Date regiDate, int viewCnt, String answer,
-			int qnaCate, QnaCategory qnaCategory) {
+			int openType, int qnaCate) {
 		super();
 		this.id = id;
 		this.writer = writer;
@@ -42,6 +62,38 @@ public class Qna {
 		this.regiDate = regiDate;
 		this.viewCnt = viewCnt;
 		this.answer = answer;
+		this.openType = openType;
+		this.qnaCate = qnaCate;
+	}
+
+
+
+
+	public Qna(String writer, String title, String question, Date regiDate, int viewCnt, String answer, int openType,
+			int qnaCate, QnaCategory qnaCategory) {
+		super();
+		this.writer = writer;
+		this.title = title;
+		this.question = question;
+		this.regiDate = regiDate;
+		this.viewCnt = viewCnt;
+		this.answer = answer;
+		this.openType = openType;
+		this.qnaCate = qnaCate;
+		this.qnaCategory = qnaCategory;
+	}
+
+	public Qna(int id, String writer, String title, String question, Date regiDate, int viewCnt, String answer,
+			int openType, int qnaCate, QnaCategory qnaCategory) {
+		super();
+		this.id = id;
+		this.writer = writer;
+		this.title = title;
+		this.question = question;
+		this.regiDate = regiDate;
+		this.viewCnt = viewCnt;
+		this.answer = answer;
+		this.openType = openType;
 		this.qnaCate = qnaCate;
 		this.qnaCategory = qnaCategory;
 	}
@@ -102,6 +154,14 @@ public class Qna {
 		this.answer = answer;
 	}
 
+	public int getOpenType() {
+		return openType;
+	}
+
+	public void setOpenType(int openType) {
+		this.openType = openType;
+	}
+
 	public int getQnaCate() {
 		return qnaCate;
 	}
@@ -117,10 +177,10 @@ public class Qna {
 	public void setQnaCategory(QnaCategory qnaCategory) {
 		this.qnaCategory = qnaCategory;
 	}
-	
-	
-	
-	
-	
 
+	
+	
+	
 }
+
+	
