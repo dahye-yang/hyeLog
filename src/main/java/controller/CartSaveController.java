@@ -12,7 +12,7 @@ import model.vo.Cart;
 import model.vo.User;
 
 @WebServlet("/private/order/cart")
-public class CartController extends HttpServlet {
+public class CartSaveController extends HttpServlet {
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

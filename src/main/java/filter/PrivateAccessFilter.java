@@ -17,7 +17,7 @@ public class PrivateAccessFilter extends HttpFilter{
 					throws IOException, ServletException {
 				
 				String uri = request.getRequestURI();
-				System.out.println(" PrivateAccessFilter.doFilter at " + uri);
+				//System.out.println(" PrivateAccessFilter.doFilter at " + uri);
 			
 				if (request.getSession().getAttribute("logonUser") != null) {
 					chain.doFilter(request, response); 

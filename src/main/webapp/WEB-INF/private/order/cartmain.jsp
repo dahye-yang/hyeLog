@@ -37,6 +37,7 @@ table, td, tr, th {
 		<form method="post">
 			<table style="margin: auto; min-width: 80%">
 				<tr style="height: 60px">
+					<th></th>
 					<th>이미지</th>
 					<th>상품명</th>
 					<th>수량</th>
@@ -46,6 +47,7 @@ table, td, tr, th {
 				</tr>
 				<c:forEach var="one" items="${list }">
 					<tr style="height: 60px">
+						<td><input type="checkbox" name="check"/> </td>
 						<td style="cursor: pointer; width: 10%"
 							onclick="location.href='${pageContext.servletContext.contextPath}/view/detail?code=${one.itemCode }'">
 							<img style="width: 100px; height: 100px"
@@ -54,11 +56,10 @@ table, td, tr, th {
 						<td style="cursor: pointer"
 							onclick="location.href='${pageContext.servletContext.contextPath}/view/detail?code=${one.itemCode }'">${one.item.name}</td>
 						<td id="piece" class="textcenter">
-							<input type="number" class="cartpiece" name="cartpiece" value="${one.cartPiece }" style="width: 50px"> 
-							<input type="hidden" name="itemPrice" value="${one.item.price }" />
+							<input type="number" class="cartpiece" name="piece" value="${one.cartPiece }" style="width: 50px"> 
+							<input type="hidden" name="price" value="${one.item.price }" />
 							<input type="hidden" name="cartId" value="${one.id}" />
-							<input class="paramPiece" type="hidden" name="cartPiece" value="${one.cartPiece}" />
-							<input type="hidden" name="itemCode" value="${one.itemCode}" />
+							<input type="hidden" name="itemcode" value="${one.itemCode}" />
 							<button id="button" style="height: 45px" type="submit" formaction="${pageContext.servletContext.contextPath}/private/order/cartupdate">변경</button>
 						</td>
 						<td id="total" class="textcenter total">
@@ -66,7 +67,12 @@ table, td, tr, th {
 						<!-- 포인트적립 -->
 						<td class="textcenter"><fmt:formatNumber value="${(one.item.price * one.cartPiece) / 100}" pattern="#,###"/> </td>
 						<!-- 선택버튼 -->
-						<td>${one.cartPiece }</td>
+						<td>	
+							<input type="hidden" name="point" value="${(one.item.price * one.cartPiece) / 100}">
+							<button type="submit" formaction="${pageContext.servletContext.contextPath }/private/order/buy">주문하기</button><br/>
+							<input type="hidden" name="cartid" value="${one.id }"/>
+							<button type="submit" formaction="${pageContext.servletContext.contextPath}/private/order/cartdelete">삭제하기</button>
+						 </td>
 						<!-- 총 정보 나열?.. -->
 					</tr>
 				</c:forEach>
@@ -140,7 +146,7 @@ table, td, tr, th {
 								document.querySelector('#buytotal').innerHTML = final.toLocaleString();
 								
 								// parameter로 넘길 piece
-								//document.querySelectorAll('.paramPiece')].forEach(function(ev){
+								//[...document.querySelectorAll('.paramPiece')].forEach(function(ev){
 								//	ev.target.value =value;
 								//});
 							});
