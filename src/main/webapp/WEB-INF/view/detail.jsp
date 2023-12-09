@@ -47,7 +47,8 @@
 					</div>
 					<div>
 						<div>
-							<button type="button">구매하기</button>
+							<input type="hidden" name="itemcode" value="${item.code }"/>
+							<button id="buy" type="submit" formaction="${pageContext.servletContext.contextPath }/private/order/cartsaveforbuy">구매하기</button>
 							<button id="cart" type="button">장바구니</button>
 							<button type="button">찜콩하기</button>	
 						</div>		
@@ -171,6 +172,16 @@
 			let $x = document.getElementById('itempiece').value; // 선택한 상품의 개수
 			if($x != 0){
 				location.href="${pageContext.servletContext.contextPath}/private/order/cart?piece="+$x+"&itemcode="+${item.code};			
+			}else{
+				window.alert("필수 옵션을 선택해주세요!");
+			}
+			
+		});
+		
+		document.querySelector('#buy').addEventListener('click', function(e){
+			let $x = document.getElementById('itempiece').value; // 선택한 상품의 개수
+			if($x != 0){
+				location.href="${pageContext.servletContext.contextPath}/private/order/buy?piece="+$x+"&itemcode="+${item.code};			
 			}else{
 				window.alert("필수 옵션을 선택해주세요!");
 			}

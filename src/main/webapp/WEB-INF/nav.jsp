@@ -49,7 +49,7 @@
 			<a href="${pageContext.servletContext.contextPath }/private/myshop">
 				<img src="${pageContext.servletContext.contextPath }/resource/image/mypage.png">
 			</a> 
-			<a href="${pageContext.servletContext.contextPath }/private/order/cart">
+			<a href="${pageContext.servletContext.contextPath }/private/order/cartmain">
 				<img src="${pageContext.servletContext.contextPath }/resource/image/cart.png">
 			</a>
 		</div>

@@ -19,26 +19,22 @@ public class CartUpdateController extends HttpServlet{
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String[] cartId = request.getParameterValues("cartId");
-		String[] cartPiece = request.getParameterValues("cartPiece");	
-		//String[] itemCode = request.getParameterValues("itemCode");
-		
-		for(int i =0; i < cartPiece.length; i++) {
-			System.out.println(cartPiece[i]);
-		}
+		String[] cartPiece = request.getParameterValues("piece");	
 		
 		CartDao cartDao = new CartDao();
 		
 		try {
 			List<Cart> list = new ArrayList<Cart>();
-			Cart one = new Cart();
+			
 			for(int i =0; i < cartId.length; i++) {
+				Cart one = new Cart();
 				one.setId(Integer.parseInt(cartId[i]));
 				one.setCartPiece(Integer.parseInt(cartPiece[i]));
-				//one.setItemCode(Integer.parseInt(itemCode[i]));
+	
 				list.add(one);
 			}
-			for(Cart g : list) {
-				boolean result = cartDao.update(g);
+			for(int i =0; i < list.size(); i++) {
+				boolean result = cartDao.update(list.get(i));
 				System.out.println("결과--->"+result);
 			}
 			
