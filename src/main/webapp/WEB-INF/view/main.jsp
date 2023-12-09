@@ -19,7 +19,7 @@
 		<div>
 			<ul style="display: flex; justify-content: center; padding:0; flex-wrap: wrap;">
 				<c:forEach var="one" items="${itemlist }">
-					<li style="width:33.3%; margin:0;  padding:15px;">
+					<li style="width:30%; margin:0;  padding:15px;">
 						<div>
 							<a
 								href="${pageContext.servletContext.contextPath }/view/detail?code=${one.code}">
