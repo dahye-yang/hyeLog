@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -46,6 +47,11 @@ public class JoinController extends HttpServlet {
 
 		if (id == "" || id == null || password == "" || password == null || nickName == "" || nickName == null) {
 			result = false;
+			response.setContentType("text/html; charset=utf-8");
+	        PrintWriter w = response.getWriter();
+	        w.write("<script>alert('필수입력 요소들을 작성해주세요 :)');history.go(-1);</script>");
+	        w.flush();
+	        w.close();
 		}
 
 		try {

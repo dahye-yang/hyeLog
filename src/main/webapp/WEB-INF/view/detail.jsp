@@ -43,6 +43,7 @@
 						<div>
 							<b>Total Price : </b>
 						</div>
+						<div></div>
 						<div><span id="total">0</span>원</div>
 					</div>
 					<div>
@@ -50,7 +51,7 @@
 							<input type="hidden" name="itemcode" value="${item.code }"/>
 							<button id="buy" type="submit" formaction="${pageContext.servletContext.contextPath }/private/order/cartsaveforbuy">구매하기</button>
 							<button id="cart" type="button">장바구니</button>
-							<button type="button">찜콩하기</button>	
+							<button id="like" type="submit" formaction="${pageContext.servletContext.contextPath }/private/like" >찜♡ </button>	
 						</div>		
 					</div>
 				</div>
@@ -185,6 +186,11 @@
 			}else{
 				window.alert("필수 옵션을 선택해주세요!");
 			}
+			
+		});
+		
+		document.querySelector('#like').addEventListener('click', function(e){
+			window.alert("찜콩하기에 담아 뒀어요 :)");
 			
 		});
 	</script>

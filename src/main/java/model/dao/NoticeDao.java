@@ -28,15 +28,15 @@ public class NoticeDao {
 			int n = pstmt.executeUpdate();
 
 			if (n == 1) {
-				
+
 				System.out.println("executeUpdate ==> " + n);
 				String str = "SELECT notices_seq.currval from dual";
 				PreparedStatement pstmt2 = conn.prepareStatement(str);
 				ResultSet rs = pstmt2.executeQuery();
-				
+
 				rs.next();
 				result = rs.getInt("currval");
-				
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,7 +44,7 @@ public class NoticeDao {
 		}
 		return result;
 	}
-	
+
 	public List<Notice> findAll() throws ClassNotFoundException {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
@@ -88,7 +88,6 @@ public class NoticeDao {
 			pstmt.setDate(3, one.getNoticeDate());
 			pstmt.setInt(4, one.getId());
 
-
 			int n = pstmt.executeUpdate();
 			if (n == 1) {
 				result = true;
@@ -124,9 +123,9 @@ public class NoticeDao {
 		}
 		return result;
 	}
-	
-public Notice findById(int idKey) throws ClassNotFoundException {
-		
+
+	public Notice findById(int idKey) throws ClassNotFoundException {
+
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
@@ -134,7 +133,7 @@ public Notice findById(int idKey) throws ClassNotFoundException {
 
 			String sql = "SELECT * FROM Notices WHERE ID = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idKey);			
+			pstmt.setInt(1, idKey);
 
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
@@ -142,8 +141,7 @@ public Notice findById(int idKey) throws ClassNotFoundException {
 				String title = rs.getString("title");
 				String message = rs.getString("message");
 				Date noticeDate = rs.getDate("notice_date");
-				
-			
+
 				return new Notice(id, title, message, noticeDate);
 			} else {
 				return null;
@@ -153,6 +151,6 @@ public Notice findById(int idKey) throws ClassNotFoundException {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 	}
 }
