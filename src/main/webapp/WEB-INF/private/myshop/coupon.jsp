@@ -51,9 +51,7 @@ table,td,tr,th{
 					</c:forEach>
 				</table>
 			
-			<table>
-			</table>
-		
+			
 
 	</div>
 </body>
