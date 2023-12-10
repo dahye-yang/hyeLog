@@ -17,12 +17,19 @@ public class CouponController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User one = (User)request.getSession().getAttribute("logonUser");
+		request.setAttribute("user", one);
 		
 		CouponStorageDao couponStorageDao = new CouponStorageDao();
 		try {
 			
 			List<CouponStorage> list = couponStorageDao.findCouponByUser(one.getId());
 			request.setAttribute("list", list);
+			
+			int c = list.size();
+			request.setAttribute("count", c);
+			
+			
+			
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

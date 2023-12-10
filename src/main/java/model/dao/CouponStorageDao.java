@@ -59,7 +59,7 @@ public class CouponStorageDao {
 				int no = rs.getInt("no");
 				String userId = rs.getString("user_id");
 				Date expDate = rs.getDate("exp_date");
-				int couponId = rs.getInt("couponId");
+				int couponId = rs.getInt("coupon_id");
 				
 				String alt = rs.getString("alt");
 				int discount = rs.getInt("discount");
