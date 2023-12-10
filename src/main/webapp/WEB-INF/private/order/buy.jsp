@@ -14,6 +14,13 @@
 <body>
 	<div class="wrap">
 		<div>
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
+		</div>
+		
+		<!--  
+		<div>
 			<div style="text-align: center; margin-bottom: 20px">
 				<a href="${pageContext.servletContext.contextPath }/view/main">
 				<p style="font-size: 40px;">HYELOG</p></a>
@@ -26,6 +33,7 @@
 					<img src="${pageContext.servletContext.contextPath }/resource/image/cart.png">
 				</a>
 			</div>
+			-->
 		</div>
 		<div style="">
 			<div>주문정보</div>

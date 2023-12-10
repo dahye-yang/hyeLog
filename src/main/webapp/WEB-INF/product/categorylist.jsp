@@ -15,7 +15,11 @@
 </head>
 <body>
 	<div class="wrap">
-		<c:import url="/nav" />
+		<div>
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
+		</div>
 		<div style="text-align: center;">
 			<p style="font-size: 40px;">${category.name }</p>
 		</div>

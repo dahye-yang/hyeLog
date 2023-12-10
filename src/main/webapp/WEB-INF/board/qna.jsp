@@ -16,8 +16,10 @@
 <div class="wrap">
 
 	<div>
-		<c:import url="/nav" />
-	</div>
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
+		</div>
 	<table style="width: 90%">
 		<tr>
 			<th>NO.</th>

@@ -23,9 +23,10 @@ table, td, tr, th {
 <body>
 	<div class="wrap">
 		<div>
-			<c:import url="/nav" />
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
 		</div>
-	
 			<h2>회원 정보 변경</h2>
 	<form action = " ${pageContext.servletContext.contextPath }/private/changeUser"	method="post"	>
 		<table style="width:100%">

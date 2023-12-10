@@ -12,8 +12,10 @@
 </head>
 <body>
 	<div class="wrap">
-		<div style="padding-bottom: 60px">
-			<c:import url="/nav" />
+		<div>
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
 		</div>
 		<div style="margin-top: 30px ;width: 70%; margin: auto; display: flex;justify-content: center;">
 			<div style="width: 30%"><!-- 아이템사진 -->

@@ -11,6 +11,12 @@
 </head>
 <body>
 
+<div>
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
+		</div>
+
 
 <br>
 <h2>

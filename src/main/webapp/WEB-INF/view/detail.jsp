@@ -16,7 +16,9 @@
 <body>
 	<div class="wrap">
 		<div>
-			<c:import url="/nav" />
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
 		</div>
 		<div style="display: flex; justify-content: center; padding-bottom: 100px; padding-top: 60px">
 			<div>
