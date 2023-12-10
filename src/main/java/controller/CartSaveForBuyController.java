@@ -55,8 +55,7 @@ public class CartSaveForBuyController extends HttpServlet {
 					three.setCartPiece(three.getCartPiece()+1);
 					cartDao.update(three);
 				}
-				
-				
+
 				Cart two = cartDao.findByUserIdAndItemCode(found.getId(), y);
 				
 				//	System.out.println("구매하려고 넘어온 아이템이름--->"+two.getItem().getName());

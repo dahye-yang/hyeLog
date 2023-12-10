@@ -24,13 +24,15 @@ table,td,tr,th{
 <body>
 	<div class="wrap">
 		<div>
-			<c:import url="/nav" />
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
 		</div>
 		<div style="width: 80%; margin: auto;">
 			<div style="text-align: center; margin-bottom: 20px">
 				<p style="font-size: 40px;">REVIEW</p>
 			</div>
-			<div>
+		
 				<table style= "margin : auto; min-width: 80%">
 					<tr>
 						<th>번호</th>
@@ -54,7 +56,6 @@ table,td,tr,th{
 					</c:forEach>
 					
 				</table>
-			</div>
 		</div>
 	</div>
 </body>

@@ -8,6 +8,15 @@ public class Coupon {
 	public Coupon() {
 		super();
 	}
+	
+	
+	public Coupon(String alt, int discount) {
+		super();
+		this.alt = alt;
+		this.discount = discount;
+	}
+
+
 	public Coupon(int id, String alt, int discount) {
 		super();
 		this.id = id;

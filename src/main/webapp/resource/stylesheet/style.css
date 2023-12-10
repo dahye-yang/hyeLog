@@ -20,6 +20,10 @@ li {
   margin-right: 5px;
 }
 
+a {
+	text-decoration: none; 
+}
+
 /*정렬*/
 
 .align-center {

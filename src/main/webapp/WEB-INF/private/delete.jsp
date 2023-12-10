@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,12 @@
 </head>
 <body>
 	<div class="wrap" style="max-width: 960px; margin: auto">
+		<div>
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
+		</div>
+	
 		<div>
 			<h1>HyeLog</h1>
 			<h2>회원탈퇴 - hyelog</h2>

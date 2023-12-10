@@ -17,8 +17,10 @@
 <div class="wrap">
 	<h2>Q&A작성</h2>
 	<div>
-		<c:import url="/nav" />
-	</div>
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
+		</div>
 	<form action="${pageContext.servletContext.contextPath }/board/qnaForm"
 		method="post">
 		<table>
