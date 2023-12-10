@@ -50,11 +50,6 @@ table,td,tr,th{
 						</tr>
 					</c:forEach>
 				</table>
-			
-			<table>
-			</table>
-		
-
 	</div>
 </body>
 </html>
