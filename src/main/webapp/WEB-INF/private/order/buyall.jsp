@@ -24,28 +24,29 @@
 			<div>주문정보</div>
 			<div>주문자 : ${found.nickName } </div>
 		</div>
-		<div style="display: flex; justify-content: flex-start;">
-			<div>
-				<img style="width: 100px; height: 100px" alt="상품사진" src="${pageContext.servletContext.contextPath }${two.item.image}">
+	<form action="${pageContext.servletContext.contextPath }/private/order/buyall" method="post">
+		<c:forEach var="one" items="${list }">
+		<input type="hidden" name="cartId" value="${one.id}">
+		<input type="hidden" name="itemCode" value="${one.itemCode}">
+			<div style="display: flex; justify-content: flex-start;">
+				<div>
+					<img style="width: 100px; height: 100px" alt="상품사진" src="${pageContext.servletContext.contextPath }${one.item.image}">
+				</div>
+				<div>
+					<div>${one.item.name }</div>
+					<div>수량 : ${one.cartPiece }개</div>
+					<div><fmt:formatNumber value="${one.cartPiece * one.item.price }" pattern="#,###"/> </div>
+				</div>
 			</div>
-			<div>
-				<div>${two.item.name }</div>
-				<div>수량 : ${two.cartPiece }</div>
-				<div><fmt:formatNumber value="${two.cartPiece * two.item.price }" pattern="#,###"/> </div>
-			</div>
-		</div>
-		<form action="${pageContext.servletContext.contextPath }/private/order/buy" method="post">
-		<input type="hidden" name="itemcode" value="${code }">
-		<input type="hidden" name="piece" value="${piece}">
-		<input type="hidden" name="cartId" value="${two.id}">
+		</c:forEach>
 			<div>
 				<div>결제정보</div>
 				<div>
 					<div style="display: flex;justify-content: flex-start;">
 						<div>주문상품</div>
 						<div>
-							<input type="hidden" name="price" value="${two.item.price * piece }" /> 
-							<fmt:formatNumber value="${two.item.price * piece }" pattern="#,###"/>
+							<input type="hidden" name="price" value="${sum }" /> 
+							<fmt:formatNumber value="${sum }" pattern="#,###"/>
 						</div>
 					</div>
 					<div>
@@ -55,19 +56,19 @@
 				</div>
 				<div>
 					<div>최종결제금액</div>
-					<div><fmt:formatNumber value="${two.item.price * piece }" pattern="#,###"/></div>
+					<div><fmt:formatNumber value="${sum }" pattern="#,###"/></div>
 				</div>
 			</div>
 			<div style="display: flex;justify-content: flex-start">
 				<div>적립 혜택</div>
 				<div>
-				<input type="hidden" name="point" value="${(two.item.price * piece) / 100 }"/>
-				<fmt:formatNumber value="${(two.item.price * piece) / 100 }" pattern="#,###"/>
+				<input type="hidden" name="point" value="${sum / 100 }"/>
+				<fmt:formatNumber value="${sum / 100 }" pattern="#,###"/>
 				</div>
 			</div>
 			<button type="submit">
 				<div>
-					<fmt:formatNumber value="${two.item.price * piece }" pattern="#,###"/> 결제하기
+					<fmt:formatNumber value="${sum }" pattern="#,###"/> 결제하기
 				</div>
 			</button>
 		</form>

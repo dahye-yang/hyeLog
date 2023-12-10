@@ -29,17 +29,17 @@ table, td, tr, th {
 				<c:import url="/nav" />
 			</header>
 		</div>
-		<div style="text-align: center; margin-bottom: 20px">
+		<div style="text-align: center; margin-bottom: 20px; margin-top: 50px;">
 			<p style="font-size: 40px;">장바구니</p>
 		</div>
 		<div>
 			<!-- 포인트, 쿠폰 나타내주는 div -->
 		</div>
 		<div>
-			<form method="get">
+			<form id="kiroko" method="get">
 				<table style="margin: auto; min-width: 80%">
 					<tr style="height: 60px">
-						<th></th>
+						<th><input type="checkbox" /> </th>
 						<th>이미지</th>
 						<th>상품명</th>
 						<th>수량</th>
@@ -49,7 +49,7 @@ table, td, tr, th {
 					</tr>
 				<c:forEach var="one" items="${list }">
 					<tr style="height: 60px">
-						<td><input id="checkBoxId" onchange="onChangeHandler();" type="checkbox" name="check" /> </td>
+						<td style="text-align: center"><input class="checkBoxId" id="checkBoxId" type="checkbox" name="check" value="0" /> </td>
 						<td style="cursor: pointer; width: 10%"
 							onclick="location.href='${pageContext.servletContext.contextPath}/view/detail?code=${one.itemCode }'">
 							<img style="width: 100px; height: 100px"
@@ -62,6 +62,7 @@ table, td, tr, th {
 							<input type="hidden" name="price" value="${one.item.price }" />
 							<input type="hidden" name="cartId" value="${one.id}" />
 							<input type="hidden" name="itemcode" value="${one.itemCode}" />
+							<input type="hidden" name="deleteNo" id="deleteNo"/>
 							<button id="button" style="height: 45px" type="submit" formaction="${pageContext.servletContext.contextPath}/private/order/cartupdate">변경</button>
 						</td>
 						<td id="total" class="textcenter total">
@@ -71,9 +72,9 @@ table, td, tr, th {
 						<!-- 선택버튼 -->
 						<td style="text-align: center">	
 							<input type="hidden" name="point" value="${(one.item.price * one.cartPiece) / 100}">
-							<button type="submit" formaction="${pageContext.servletContext.contextPath }/private/order/buycart">주문하기</button><br/>
+							<button type="button" onclick="buyAtCartSubmit(${one.itemCode})">주문하기</button><br/>
 							<input type="hidden" name="cartid" value="${one.id }"/>
-							<button type="submit" formaction="${pageContext.servletContext.contextPath}/private/order/cartdelete">삭제하기</button>
+							<button type="button" onclick="deleteSubmit(${one.id})">삭제하기</button>
 						 </td>
 						<!-- 총 정보 나열?.. -->
 					</tr>
@@ -94,7 +95,8 @@ table, td, tr, th {
 					</tr>
 				</table>
 				<div style="text-align: center; margin-top: 30px">
-					<button type="submit" formaction="${pageContext.servletContext.contextPath }/private/order/buy">전체주문하기</button>
+					<button type="submit" name="check" value='selectall' onclick='selectAll(this)'
+					formaction="${pageContext.servletContext.contextPath }/private/order/buycartall">전체주문하기</button>
 				</div>
 			</form>
 		</div>
@@ -174,11 +176,39 @@ table, td, tr, th {
 			} 
 	
 		}); */
+		// 장바구니에서 삭제하기
+		function deleteSubmit(id){
+			document.getElementById("deleteNo").value =id;
+			document.getElementById("kiroko").action = "${pageContext.servletContext.contextPath}/private/order/cartdelete";
+			document.getElementById("kiroko").submit();
+		}
+		// 장바구니에서 주문하기
+		function buyAtCartSubmit(id){
+			document.getElementById("deleteNo").value =id;
+			document.getElementById("kiroko").action = "${pageContext.servletContext.contextPath}/private/order/buycart";
+			document.getElementById("kiroko").submit();
+		}
 		
-		/* function onChangeHandler(e){  
-			   var checkbox = document.getElementById('checkBoxId');
-			   console.log(e.target.checked);
-			} */
+		[...document.querySelectorAll('.checkBoxId')].forEach(function(elm) {
+			elm.addEventListener(
+					'change',
+					function(e) {
+						let value = e.target.value;
+						e.target.value = 1;
+						console.log(e.target.value);
+						
+					});
+
+		});
+		function selectAll(selectAll)  {
+			  const checkboxes 
+			       = document.getElementsByName('check');
+			  
+			  checkboxes.forEach((checkbox) => {
+			    checkbox.checked = selectAll.checked;
+			  })
+			}
+		
 	</script>
 </body>
 </html>
