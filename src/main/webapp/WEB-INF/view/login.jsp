@@ -17,7 +17,7 @@
 				<c:import url="/nav" />
 			</header>
 		</div>
-		<div style="max-width: 960px; margin: auto">
+		<div style="max-width: 960px; margin: auto; margin-top: 50px;">
 			<div style="width: 360px; text-align: center; margin: auto">
 				<h2>Login - hyelog</h2>
 			</div>

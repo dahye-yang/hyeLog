@@ -28,7 +28,7 @@ table,td,tr,th{
 				<c:import url="/nav" />
 			</header>
 		</div>
-		<div style="width: 80%; margin: auto;">
+		<div style="width: 80%; margin: auto; margin-top: 50px;">
 			<div style="text-align: center; margin-bottom: 20px">
 				<p style="font-size: 40px;">REVIEW</p>
 			</div>

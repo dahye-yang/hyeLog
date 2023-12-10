@@ -12,6 +12,7 @@ public class BuyLog {
 	
 	private Item item; 
 	private ItemImg itemImg;
+	private Cart cart;
 	
 	public BuyLog() {
 		super();
@@ -28,6 +29,15 @@ public class BuyLog {
 	}
 	
 	
+
+	public BuyLog(int id, String userId, int price, Date buyDate, Cart cart) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.price = price;
+		this.buyDate = buyDate;
+		this.cart = cart;
+	}
 
 	public BuyLog(int id, int price, Date buyDate, int piece, int itemCode, Item item, ItemImg itemImg) {
 		super();

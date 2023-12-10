@@ -48,6 +48,14 @@ public class Cart {
 		this.itemCode = itemCode;
 		this.items = items;
 	}
+	
+	
+
+	public Cart(int cartPiece, int itemCode) {
+		super();
+		this.cartPiece = cartPiece;
+		this.itemCode = itemCode;
+	}
 
 	public int getId() {
 		return id;
