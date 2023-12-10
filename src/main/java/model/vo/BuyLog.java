@@ -10,6 +10,9 @@ public class BuyLog {
 	private int piece;
 	private int itemCode;
 	
+	private Item item; 
+	private ItemImg itemImg;
+	
 	public BuyLog() {
 		super();
 	}
@@ -22,6 +25,44 @@ public class BuyLog {
 		this.buyDate = buyDate;
 		this.piece = piece;
 		this.itemCode = itemCode;
+	}
+	
+	
+
+	public BuyLog(int id, int price, Date buyDate, int piece, int itemCode, Item item, ItemImg itemImg) {
+		super();
+		this.id = id;
+		this.price = price;
+		this.buyDate = buyDate;
+		this.piece = piece;
+		this.itemCode = itemCode;
+		this.item = item;
+		this.itemImg = itemImg;
+	}
+
+	public BuyLog(int id, String userId, int price, Date buyDate, int piece, int itemCode, Item item) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.price = price;
+		this.buyDate = buyDate;
+		this.piece = piece;
+		this.itemCode = itemCode;
+		this.item = item;
+	}
+	
+	
+
+	public BuyLog(int id, String userId, int price, Date buyDate, int piece, int itemCode, Item item, ItemImg itemImg) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.price = price;
+		this.buyDate = buyDate;
+		this.piece = piece;
+		this.itemCode = itemCode;
+		this.item = item;
+		this.itemImg = itemImg;
 	}
 
 	public int getId() {
@@ -71,6 +112,23 @@ public class BuyLog {
 	public void setItemCode(int itemCode) {
 		this.itemCode = itemCode;
 	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
+	public ItemImg getItemImg() {
+		return itemImg;
+	}
+
+	public void setItemImg(ItemImg itemImg) {
+		this.itemImg = itemImg;
+	}
+	
 	
 	
 }

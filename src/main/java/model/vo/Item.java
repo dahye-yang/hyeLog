@@ -15,6 +15,16 @@ public class Item {
 	public Item() {
 		super();
 	}
+	
+	
+	public Item(String name, int price, int categoryId) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.categoryId = categoryId;
+	}
+
+
 	public Item(int code, String name, int price, String detail, int categoryId) {
 		super();
 		this.code = code;
@@ -42,6 +52,15 @@ public class Item {
 		this.categoryId = categoryId;
 		this.itemImg = itemImg;
 	}
+	
+	
+	public Item(String name, String image) {
+		super();
+		this.name = name;
+		this.image = image;
+	}
+
+
 	public int getCode() {
 		return code;
 	}

@@ -1,15 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+table, td, tr, th {
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	border-radius: 0;
+	border-bottom: 1px solid #444;
+	border-collapse: collapse;
+}
+</style>
 <link href="${pageContext.servletContext.contextPath }
 			/resource/stylesheet/style.css" rel = "stylesheet"></link>
 <meta charset="UTF-8">
 <meta name = "viewport" content="width=divice-width, initial-scale=1.0">
-<title>회원정보 변경</title>
+<title>HYELOG</title>
 </head>
 <body>
+	<div class="wrap">
+		<div>
+			<c:import url="/nav" />
+		</div>
 	
 			<h2>회원 정보 변경</h2>
 	<form action = " ${pageContext.servletContext.contextPath }/private/changeUser"	method="post"	>
@@ -55,6 +70,8 @@
 	
 	</table>
 </form>		
+
+</div>
 <script>
 	document.querySelector("#openPassBt").addEventListener("click", function(evt) {
 		evt.target.parentNode.parentNode.style.display="none";
