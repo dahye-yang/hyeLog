@@ -10,6 +10,16 @@ public class Coupon {
 	}
 	
 	
+	
+	
+	public Coupon(int discount) {
+		super();
+		this.discount = discount;
+	}
+
+
+
+
 	public Coupon(String alt, int discount) {
 		super();
 		this.alt = alt;
