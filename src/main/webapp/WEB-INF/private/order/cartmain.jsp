@@ -36,67 +36,68 @@ table, td, tr, th {
 			<!-- 포인트, 쿠폰 나타내주는 div -->
 		</div>
 		<div>
-		<form method="get">
-			<table style="margin: auto; min-width: 80%">
-				<tr style="height: 60px">
-					<th></th>
-					<th>이미지</th>
-					<th>상품명</th>
-					<th>수량</th>
-					<th>상품구매금액</th>
-					<th>적립포인트</th>
-					<th>선택</th>
-				</tr>
-			<c:forEach var="one" items="${list }">
-				<tr style="height: 60px">
-					<td><input type="checkbox" name="check"/> </td>
-					<td style="cursor: pointer; width: 10%"
-						onclick="location.href='${pageContext.servletContext.contextPath}/view/detail?code=${one.itemCode }'">
-						<img style="width: 100px; height: 100px"
-						src="${pageContext.servletContext.contextPath }${one.item.image }">
-					</td>
-					<td style="cursor: pointer"
-						onclick="location.href='${pageContext.servletContext.contextPath}/view/detail?code=${one.itemCode }'">${one.item.name}</td>
-					<td id="piece" class="textcenter">
-						<input type="number" class="cartpiece" name="piece" value="${one.cartPiece }" style="width: 50px"> 
-						<input type="hidden" name="price" value="${one.item.price }" />
-						<input type="hidden" name="cartId" value="${one.id}" />
-						<input type="hidden" name="itemcode" value="${one.itemCode}" />
-						<button id="button" style="height: 45px" type="submit" formaction="${pageContext.servletContext.contextPath}/private/order/cartupdate">변경</button>
-					</td>
-					<td id="total" class="textcenter total">
-						<fmt:formatNumber value="${one.item.price * one.cartPiece  }" pattern="#,###" /></td>
-					<!-- 포인트적립 -->
-					<td class="textcenter"><fmt:formatNumber value="${(one.item.price * one.cartPiece) / 100}" pattern="#,###"/> </td>
-					<!-- 선택버튼 -->
-					<td style="text-align: center">	
-						<input type="hidden" name="point" value="${(one.item.price * one.cartPiece) / 100}">
-						<button type="submit" formaction="${pageContext.servletContext.contextPath }/private/order/buy">주문하기</button><br/>
-						<input type="hidden" name="cartid" value="${one.id }"/>
-						<button type="submit" formaction="${pageContext.servletContext.contextPath}/private/order/cartdelete">삭제하기</button>
-					 </td>
-					<!-- 총 정보 나열?.. -->
-				</tr>
-			</c:forEach>
-				<tr>
-					<td colspan="3"></td>
-					<td colspan="3">합계 : <span id="final">0</span></td>
-				</tr>
-				<tr>
-					<th colspan="3">총 상품금액</th>
-					<th colspan="2">총 할인금액</th>
-					<th colspan="3">결제예정금액</th>
-				</tr>
-				<tr>
-					<td colspan="3" class="textcenter"><span id="underbartotal">0</span></td>
-					<td colspan="2" class="textcenter">0</td>
-					<td colspan="3" class="textcenter">=<span id="buytotal">0</span></td>
-				</tr>
-			</table>
-			<div style="text-align: center; margin-top: 30px">
-				<button type="submit" formaction="${pageContext.servletContext.contextPath }/private/order/buy">전체주문하기</button>
-			</div>
-		</form>
+			<form method="get">
+				<table style="margin: auto; min-width: 80%">
+					<tr style="height: 60px">
+						<th></th>
+						<th>이미지</th>
+						<th>상품명</th>
+						<th>수량</th>
+						<th>상품구매금액</th>
+						<th>적립포인트</th>
+						<th>선택</th>
+					</tr>
+				<c:forEach var="one" items="${list }">
+					<tr style="height: 60px">
+						<td><input id="checkBoxId" onchange="onChangeHandler();" type="checkbox" name="check" /> </td>
+						<td style="cursor: pointer; width: 10%"
+							onclick="location.href='${pageContext.servletContext.contextPath}/view/detail?code=${one.itemCode }'">
+							<img style="width: 100px; height: 100px"
+							src="${pageContext.servletContext.contextPath }${one.item.image }">
+						</td>
+						<td style="cursor: pointer"
+							onclick="location.href='${pageContext.servletContext.contextPath}/view/detail?code=${one.itemCode }'">${one.item.name}</td>
+						<td id="piece" class="textcenter">
+							<input type="number" class="cartpiece" name="piece" value="${one.cartPiece }" style="width: 50px"> 
+							<input type="hidden" name="price" value="${one.item.price }" />
+							<input type="hidden" name="cartId" value="${one.id}" />
+							<input type="hidden" name="itemcode" value="${one.itemCode}" />
+							<button id="button" style="height: 45px" type="submit" formaction="${pageContext.servletContext.contextPath}/private/order/cartupdate">변경</button>
+						</td>
+						<td id="total" class="textcenter total">
+							<fmt:formatNumber value="${one.item.price * one.cartPiece  }" pattern="#,###" /></td>
+						<!-- 포인트적립 -->
+						<td class="textcenter"><fmt:formatNumber value="${(one.item.price * one.cartPiece) / 100}" pattern="#,###"/> </td>
+						<!-- 선택버튼 -->
+						<td style="text-align: center">	
+							<input type="hidden" name="point" value="${(one.item.price * one.cartPiece) / 100}">
+							<button type="submit" formaction="${pageContext.servletContext.contextPath }/private/order/buycart">주문하기</button><br/>
+							<input type="hidden" name="cartid" value="${one.id }"/>
+							<button type="submit" formaction="${pageContext.servletContext.contextPath}/private/order/cartdelete">삭제하기</button>
+						 </td>
+						<!-- 총 정보 나열?.. -->
+					</tr>
+				</c:forEach>
+					<tr>
+						<td colspan="3"></td>
+						<td colspan="3">합계 : <span id="final">0</span></td>
+					</tr>
+					<tr>
+						<th colspan="3">총 상품금액</th>
+						<th colspan="2">총 할인금액</th>
+						<th colspan="3">결제예정금액</th>
+					</tr>
+					<tr>
+						<td colspan="3" class="textcenter"><span id="underbartotal">0</span></td>
+						<td colspan="2" class="textcenter">0</td>
+						<td colspan="3" class="textcenter">=<span id="buytotal">0</span></td>
+					</tr>
+				</table>
+				<div style="text-align: center; margin-top: 30px">
+					<button type="submit" formaction="${pageContext.servletContext.contextPath }/private/order/buy">전체주문하기</button>
+				</div>
+			</form>
+		</div>
 	</div>
 	<script>
 		
@@ -162,7 +163,22 @@ table, td, tr, th {
 			}
 			
 		});
+		/* let $checkBox = document.querySelector('#checkBoxId');
+		document.querySelector('#checkBoxId').addEventListener('change',function(e){
+			console.log(e);
+			console.log(e.target.value);
+			/* if($checkBox.is(":checked")){
+				window.alert("체크했음!");
+			}else{
+				window.alert("체크해지!");
+			} 
+	
+		}); */
 		
+		/* function onChangeHandler(e){  
+			   var checkbox = document.getElementById('checkBoxId');
+			   console.log(e.target.checked);
+			} */
 	</script>
 </body>
 </html>
