@@ -54,10 +54,10 @@ public class BuyController extends HttpServlet{
 			// user의 잔액이 0이거나 구매금액 마이너스 금액이 0이하이면...
 			if(found.getBalance() < 0 || found.getBalance()-price2 < 0) {
 				response.setContentType("text/html; charset=utf-8");
-				PrintWriter w = response.getWriter();
-				w.write("<script>alert('잔액이 부족합니다');</script>");
-				w.flush();
-				w.close();
+		        PrintWriter w = response.getWriter();
+		        w.write("<script>alert('잔액이 부족합니다😥\n잔엑충전 해 주세요 🥰');history.go(-1);</script>");
+		        w.flush();
+		        w.close();
 			}else {
 				// 구매 Log 저장
 				boolean result = buylogdao.save(one);

@@ -17,7 +17,6 @@
   text-align: center;
   padding :20px;
 }
-
 	.wrapper > div {
   border-radius: 5px;
 

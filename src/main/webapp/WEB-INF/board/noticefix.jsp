@@ -14,8 +14,10 @@
 	<div class="wrap">
 		<div>
 			<div>
+			<header style="background-color: #F2F1EB">
 				<c:import url="/nav" />
-			</div>
+			</header>
+		</div>
 			<div style="text-align: center; margin-bottom: 20px">
 				<p style="font-size: 40px;">NOTICE</p>
 			</div>

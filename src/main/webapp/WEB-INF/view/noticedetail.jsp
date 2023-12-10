@@ -13,7 +13,9 @@
 <body>
 	<div class="wrap">
 		<div>
-			<c:import url="/nav" />
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
 		</div>
 		<div style="text-align: center; margin-bottom: 20px">
 			<p style="font-size: 40px;">NOTICE</p>

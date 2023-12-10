@@ -8,6 +8,8 @@ public class CouponStorage {
 	private Date expDate;
 	private int couponId;
 	
+	private Coupon coupon;
+	
 	public CouponStorage() {
 		super();
 	}
@@ -20,6 +22,18 @@ public class CouponStorage {
 		this.expDate = expDate;
 		this.couponId = couponId;
 	}
+	
+	
+
+	public CouponStorage(int no, String userId, Date expDate, int couponId, Coupon coupon) {
+		super();
+		this.no = no;
+		this.userId = userId;
+		this.expDate = expDate;
+		this.couponId = couponId;
+		this.coupon = coupon;
+	}
+
 
 	public int getNo() {
 		return no;
@@ -47,6 +61,18 @@ public class CouponStorage {
 	public void setCouponId(int couponId) {
 		this.couponId = couponId;
 	}
+
+
+	public Coupon getCoupon() {
+		return coupon;
+	}
+
+
+	public void setCoupon(Coupon coupon) {
+		this.coupon = coupon;
+	}
+	
+	
 	
 	
 	
