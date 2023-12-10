@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div>
-	<div style="display: flex; justify-content: space-between;">
+	<div style="display: flex; justify-content: space-between; height: 80px">
 		<div>
 			<a href="${pageContext.servletContext.contextPath }/view/main"> <img
-				src="${pageContext.servletContext.contextPath }/resource/image/title.jpg" /></a>
+				src="${pageContext.servletContext.contextPath }/resource/image/title.png" /></a>
 		</div>
 		<div style="display: flex; justify-content: end">
 			<c:choose>
@@ -18,6 +18,7 @@
 							<li><a href="${pageContext.servletContext.contextPath }/view/noticemain">NOTICE</a></li>
 							<li><a href="${pageContext.servletContext.contextPath }/board/qna">Q&A</a></li>
 							<li><a href="${pageContext.servletContext.contextPath }/view/reviewmain">REVIEW</a></li>
+							<li><a href="${pageContext.servletContext.contextPath }/private/likemain">LIKE</a></li>
 						</ul>
 					</div>
 				</c:when>
@@ -46,10 +47,10 @@
 			</ul>
 		</div>
 		<div>
-			<a href="${pageContext.servletContext.contextPath }/private/myshop">
+			<a style="text-decoration-line:none" href="${pageContext.servletContext.contextPath }/private/myshop">
 				<img src="${pageContext.servletContext.contextPath }/resource/image/mypage.png">
 			</a> 
-			<a href="${pageContext.servletContext.contextPath }/private/order/cartmain">
+			<a style="text-decoration-line:none" href="${pageContext.servletContext.contextPath }/private/order/cartmain">
 				<img src="${pageContext.servletContext.contextPath }/resource/image/cart.png">
 			</a>
 		</div>

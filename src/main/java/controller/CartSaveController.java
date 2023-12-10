@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -35,8 +36,12 @@ public class CartSaveController extends HttpServlet {
 			one.setItemCode(Integer.parseInt(itemCode));
 			
 			cartdao.save(one);
-			response.sendRedirect(request.getServletContext().getContextPath()+"/view/detail?code="+itemCode);
-			//request.getRequestDispatcher("/WEB-INF/private/order/cart.jsp").forward(request, response);
+			
+			response.setContentType("text/html; charset=utf-8");
+	        PrintWriter w = response.getWriter();
+	        w.write("<script>alert('장바구니에 담았어요 :)');history.go(-1);</script>");
+	        w.flush();
+	        w.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

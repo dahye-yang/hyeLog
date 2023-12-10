@@ -15,11 +15,11 @@ public class CartDeleteController extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("cartid");
-		
+		int x= Integer.parseInt(id);
 		CartDao cartdao = new CartDao();
 		
 		try {
-			boolean result = cartdao.deletById(Integer.parseInt(id));
+			boolean result = cartdao.deletById(x);
 			System.out.println("삭제결과 -->"+result);
 		} catch (Exception e) {
 			e.printStackTrace();
