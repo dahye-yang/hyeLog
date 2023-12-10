@@ -30,7 +30,6 @@ public class UserDao {
 
 			if (n == 1) {
 				result = true;
-				System.out.println("executeUpdate ==> " + n);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

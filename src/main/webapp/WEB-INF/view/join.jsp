@@ -35,7 +35,9 @@ tr{
 <body>
 	<div class="wrap">
 		<div>
-			<c:import url="/nav" />
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
 		</div>
 		<div style="padding-left: 20%; padding-right: 20%">
 			<div style="padding-top: 30px">
