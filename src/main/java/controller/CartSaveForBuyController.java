@@ -58,8 +58,8 @@ public class CartSaveForBuyController extends HttpServlet {
 
 				Cart two = cartDao.findByUserIdAndItemCode(found.getId(), y);
 				
-				//	System.out.println("구매하려고 넘어온 아이템이름--->"+two.getItem().getName());
-				//	System.out.println("개수-->"+two.getCartPiece());
+				System.out.println("구매하려고 넘어온 아이템이름--->"+two.getItem().getName());
+				System.out.println("개수-->"+two.getCartPiece());
 				request.setAttribute("found", found);
 				request.setAttribute("two", two);
 				request.setAttribute("piece", x);

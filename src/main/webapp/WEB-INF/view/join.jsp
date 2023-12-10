@@ -39,7 +39,7 @@ tr{
 				<c:import url="/nav" />
 			</header>
 		</div>
-		<div style="padding-left: 20%; padding-right: 20%">
+		<div style="padding-left: 20%; padding-right: 20%; margin-top: 50px;">
 			<div style="padding-top: 30px">
 				<div>
 					<h2 style="font-size: 30px">JOIN</h2>
