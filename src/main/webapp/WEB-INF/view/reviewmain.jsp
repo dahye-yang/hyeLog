@@ -32,7 +32,7 @@ table,td,tr,th{
 			<div style="text-align: center; margin-bottom: 20px">
 				<p style="font-size: 40px;">REVIEW</p>
 			</div>
-			<div>
+		
 				<table style= "margin : auto; min-width: 80%">
 					<tr>
 						<th>번호</th>
@@ -56,7 +56,6 @@ table,td,tr,th{
 					</c:forEach>
 					
 				</table>
-			</div>
 		</div>
 	</div>
 </body>
