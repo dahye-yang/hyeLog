@@ -25,23 +25,36 @@ public class CartSaveController extends HttpServlet {
 		System.out.println("piece --> "+ piece);
 		System.out.println("itemcode --> "+ itemCode);
 		
-		CartDao cartdao = new CartDao();
+		CartDao cartDao = new CartDao();
 		
 		try {
+			//카트를 찾아서 만약 같은 아이템코드의 카트가 있다면 개수만 + / 없다면 카트에 저장하기
+			Cart two = cartDao.findByUserIdAndItemCode(found.getId(), Integer.parseInt(itemCode));
 			
-			Cart one = new Cart();
-			one.setId(0);
-			one.setUserId(found.getId());
-			one.setCartPiece(Integer.parseInt(piece));
-			one.setItemCode(Integer.parseInt(itemCode));
-			
-			cartdao.save(one);
-			
-			response.setContentType("text/html; charset=utf-8");
-	        PrintWriter w = response.getWriter();
-	        w.write("<script>alert('장바구니에 담았어요 :)');history.go(-1);</script>");
-	        w.flush();
-	        w.close();
+			if(two == null) {
+				Cart one = new Cart();
+				one.setId(0);
+				one.setUserId(found.getId());
+				one.setCartPiece(Integer.parseInt(piece));
+				one.setItemCode(Integer.parseInt(itemCode));
+				
+				cartDao.save(one);
+				
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter w = response.getWriter();
+				w.write("<script>alert('장바구니에 담았어요 :)');history.go(-1);</script>");
+				w.flush();
+				w.close();
+				
+			}else {
+				two.setCartPiece(two.getCartPiece()+1);
+				cartDao.update(two);
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter w = response.getWriter();
+				w.write("<script>alert('장바구니에 담았어요 :)');history.go(-1);</script>");
+				w.flush();
+				w.close();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

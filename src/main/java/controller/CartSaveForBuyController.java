@@ -39,13 +39,23 @@ public class CartSaveForBuyController extends HttpServlet {
 		        w.flush();
 		        w.close();
 			}else {
-				Cart one = new Cart();
-				one.setId(0);
-				one.setUserId(found.getId());
-				one.setCartPiece(x);
-				one.setItemCode(y);
 				
-				cartDao.save(one);
+				//카트를 찾아서 만약 같은 아이템코드의 카트가 있다면 개수만 + / 없다면 카트에 저장하기
+				Cart three = cartDao.findByUserIdAndItemCode(found.getId(), y);
+				
+				if(three == null) {
+					Cart one = new Cart();
+					one.setId(0);
+					one.setUserId(found.getId());
+					one.setCartPiece(x);
+					one.setItemCode(y);
+					
+					cartDao.save(one);
+				}else {
+					three.setCartPiece(three.getCartPiece()+1);
+					cartDao.update(three);
+				}
+				
 				
 				Cart two = cartDao.findByUserIdAndItemCode(found.getId(), y);
 				
