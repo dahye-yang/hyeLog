@@ -14,9 +14,11 @@
 <body>
 	<div class="wrap">
 		<div>
-			<c:import url="/nav" />
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
 		</div>
-		<div>
+		<div style="margin-top: 50px;">
 			<ul style="display: flex; justify-content: center; padding:0; flex-wrap: wrap;">
 				<c:forEach var="one" items="${itemlist }">
 					<li style="width:30%; margin:0;  padding:15px;">
