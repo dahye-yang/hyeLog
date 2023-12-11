@@ -4,6 +4,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+input{
+	border: none;
+	width : 300px;
+	margin-left : 10px;
+	
+}
+table,td,tr,th{
+	border-left:none;
+	border-right: none;
+	border-radius: 0;
+	border-bottom: 1px solid #444;
+	border-collapse: collapse;
+}
+th{
+	background-color: #e9ecef;
+}
+tr{
+	height: 60px
+}
+</style>
 <link
 	href="${pageContext.servletContext.contextPath }
 			/resource/stylesheet/style.css"
@@ -21,6 +42,8 @@
 				<c:import url="/nav" />
 			</header>
 		</div>
+		
+		<div style="padding-left: 20%; padding-right: 20%; margin-top: 50px;">
 	<form action="${pageContext.servletContext.contextPath }/board/qnaForm"
 		method="post">
 		<table>
@@ -70,7 +93,7 @@
 
 	</form>
 
-
+</div>
 </div>
 </body>
 </html>
