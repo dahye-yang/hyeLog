@@ -39,10 +39,10 @@ tr{
 				<c:import url="/nav" />
 			</header>
 		</div>
-		<div style="padding-left: 20%; padding-right: 20%; margin-top: 50px;">
+		<div style="padding-left: 20%; padding-right: 20%; margin-top: 100px;">
 			<div style="padding-top: 30px">
 				<div>
-					<h2 style="font-size: 30px">JOIN</h2>
+					<h2 style="font-size: 70px">JOIN</h2>
 				</div>
 				<div>
 					회원가입을 하시면 편하게 쇼핑하실 수 있습니다.

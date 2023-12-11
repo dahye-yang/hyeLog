@@ -58,13 +58,19 @@ table, td, tr, th {
 						</td>
 						<!-- 선택버튼 -->
 						<td style="text-align: center">	
-							<input type="hidden" name="piece" value="1"/>
-							<button type="submit" style="padding-left: 10px; padding-right: 10px"
-								onclick="addCartSubmit(${one.item.code})">장바구니에 넣기</button><br/>
-							<input type="hidden" name="cartid" value=""/> <!-- 장바구니 value 틀림 -->
-							<input type="hidden" name="itemcode" value="${one.item.code }"/>
-							<input type="hidden" name="deleteNo" id="deleteNo"/>
-							<button type="button" onclick="deleteSubmit(${one.item.code})">삭제하기</button>
+							<div style="display: block;">
+								<div>
+									<input type="hidden" name="piece" value="1"/>
+									<button type="submit" style="padding-left: 10px; padding-right: 10px"
+										onclick="addCartSubmit(${one.item.code})">장바구니에 넣기</button>
+								</div>
+								<div style="margin-top: 3px;">
+									<input type="hidden" name="cartid" value=""/> <!-- 장바구니 value 틀림 -->
+									<input type="hidden" name="itemcode" value="${one.item.code }"/>
+									<input type="hidden" name="deleteNo" id="deleteNo"/>
+									<button type="button" onclick="deleteSubmit(${one.item.code})">삭제하기</button>
+								</div>
+						 	</div>
 						 </td>
 						<!-- 총 정보 나열?.. -->
 					</tr>
