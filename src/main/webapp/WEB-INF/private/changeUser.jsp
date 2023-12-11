@@ -5,13 +5,24 @@
 <html>
 <head>
 <style>
-table, td, tr, th {
-	border-left: none;
+input{
+	border: 1px solid #444;
+	width : 300px;
+	margin-left : 10px;
+	outline: black;
+}
+table,td,tr,th{
+	border-left:none;
 	border-right: none;
-	border-top: none;
 	border-radius: 0;
 	border-bottom: 1px solid #444;
 	border-collapse: collapse;
+}
+th{
+	background-color: #e9ecef;
+}
+tr{
+	height: 60px
 }
 </style>
 <link href="${pageContext.servletContext.contextPath }
@@ -30,7 +41,11 @@ table, td, tr, th {
 			<h2>회원 정보 변경</h2>
 	<form action = " ${pageContext.servletContext.contextPath }/private/changeUser"	method="post"	>
 		<table style="width:100%">
-	
+		<colgroup>
+			<col style="width :150px;">
+			<col style="width :auto">
+		</colgroup>
+	    <tbody>
 	    	<tr>
 	
 		        <th>아이디</th>
@@ -68,7 +83,7 @@ table, td, tr, th {
 		   		<button type="button"  id="closeNickBt">취소</button>
 		   		<td>
 	   		</tr>
-	
+		</tbody>
 	</table>
 </form>		
 
