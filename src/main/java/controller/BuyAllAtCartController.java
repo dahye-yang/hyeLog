@@ -11,7 +11,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dao.CartDao;
+import model.dao.CouponStorageDao;
+import model.dao.PointDao;
 import model.vo.Cart;
+import model.vo.CouponStorage;
+import model.vo.Point;
 import model.vo.User;
 
 @WebServlet("/private/order/buycartall")
@@ -22,37 +26,47 @@ public class BuyAllAtCartController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 장바구니에서 전체구매
-		String[] itemCode2 = request.getParameterValues("itemcode");
-//		for(String a : itemCode2) {
-//			System.out.println("넘어온 아이템코드--?"+ a);
-//		}
-
+		String[] cartId = request.getParameterValues("cartId");
+		String orderId = request.getParameter("deleteNo");
+		
 		User found = (User)request.getSession().getAttribute("logonUser");
 		CartDao cartDao = new CartDao();
+		PointDao pointDao = new PointDao();
+		CouponStorageDao couponStorageDao = new CouponStorageDao();
 		
-		List<Cart> list = new ArrayList<Cart>();
+		if(orderId != null) {
+			cartId = new String[cartId.length];
+			cartId[0] = orderId;
+			
+		} 
+		
+//		System.out.println("카트아이디 갯수---->"+cartId.length); // 넘어오고..?
+		
 		int sum = 0;
 		
 		try {
-			if(itemCode2 != null) {
-				// 전체구매
-				for(int i =0; i< itemCode2.length; i++) {
-					Cart one = cartDao.findByUserIdAndItemCode(found.getId(), Integer.parseInt(itemCode2[i]));
-					list.add(one);
-				}
+			if(cartId != null) {
+				
+				List<Cart> list = cartDao.findByUserIdAndCartId(found.getId(), cartId);
+				
 				System.out.println("담긴리스트 사이즈--->"+list.size());
 	
 				for(Cart a : list) {
 					sum += a.getCartPiece() * a.getItem().getPrice();
 				}
 				System.out.println("구매할 예상총액은--?"+sum);
-				// 개별구매
 				
+				Point four = pointDao.findPointSumByUserId(found.getId());
+				//쿠폰
+				List<CouponStorage> couponList =  couponStorageDao.findCouponByUser(found.getId());
+				request.setAttribute("couponList", couponList);
+				
+				request.setAttribute("point", four);
 				request.setAttribute("sum", sum);
 				request.setAttribute("list", list);
 				request.setAttribute("found", found);
 				
-				request.getRequestDispatcher("/WEB-INF/private/order/buyall.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/private/order/buy.jsp").forward(request, response);
 			}else {
 				response.setContentType("text/html; charset=utf-8");
 				PrintWriter w = response.getWriter();
@@ -65,6 +79,5 @@ public class BuyAllAtCartController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 }

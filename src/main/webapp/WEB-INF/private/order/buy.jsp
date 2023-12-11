@@ -10,67 +10,182 @@
 <link href="${pageContext.servletContext.contextPath }
 			/resource/stylesheet/style.css" rel = "stylesheet"></link>
 <title>HYELOG</title>
-<script>
-</script>
+<style>
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+	input{
+		border: 2px solid #F2F1EB;
+	}
+
+</style>
 </head>
 <body>
-	<div class="wrap">
+	<div class="wrap" style="max-width: 850px">
 		<div>
 			<header style="background-color: #F2F1EB">
 				<c:import url="/nav" />
 			</header>
 		</div>
-		<div style="margin-top: 50px;">
-			<div>주문정보</div>
-			<div>주문자 : ${found.nickName } </div>
-		</div>
-		<div style="display: flex; justify-content: flex-start;">
-			<div>
-				<img style="width: 100px; height: 100px" alt="상품사진" src="${pageContext.servletContext.contextPath }${two.item.image}">
+		<div>
+			<div style="background-color: #EEF0E5; margin-top: 55px;">
+				<div style="font-size: 40px; text-align: center">주문/결제</div>
 			</div>
-			<div>
-				<div>${two.item.name }</div>
-				<div>수량 : ${two.cartPiece }</div>
-				<div><fmt:formatNumber value="${two.cartPiece * two.item.price }" pattern="#,###"/> </div>
+			<div style="border-bottom: 3px solid #F2F1EB">
+				<div>주문정보</div>
+				<div>주문자 : ${found.nickName } </div>
 			</div>
-		</div>
-		<form action="${pageContext.servletContext.contextPath }/private/order/buy" method="post">
-		<input type="hidden" name="itemcode" value="${code }">
-		<input type="hidden" name="piece" value="${piece}">
-		<input type="hidden" name="cartId" value="${two.id}">
-			<div>
-				<div>결제정보</div>
-				<div>
-					<div style="display: flex;justify-content: flex-start;">
-						<div>주문상품</div>
-						<div>
-							<input type="hidden" name="price" value="${two.item.price * piece }" /> 
-							<fmt:formatNumber value="${two.item.price * piece }" pattern="#,###"/>
-						</div>
+			<c:forEach var="one" items="${list }">
+				<div style="display: flex; justify-content: flex-start; border-bottom: 3px solid #F2F1EB; gap:10px">
+					<div>
+						<img style="width: 100px; height: 100px" alt="상품사진" src="${pageContext.servletContext.contextPath }${one.item.image}">
 					</div>
 					<div>
-						<div>할인금액</div>
-						<div>할인금액을 넣어줘여기다가</div>
+						<div>${one.item.name }</div>
+						<div>수량 : ${one.cartPiece }</div>
+						<div><fmt:formatNumber value="${one.cartPiece * one.item.price }" pattern="#,###"/> </div>
 					</div>
 				</div>
-				<div>
-					<div>최종결제금액</div>
-					<div><fmt:formatNumber value="${two.item.price * piece }" pattern="#,###"/></div>
+			</c:forEach>
+			<form action="${pageContext.servletContext.contextPath }/private/order/buy" method="post">
+			<c:forEach var="two" items="${list }">
+				<input type="hidden" name="itemcode" value="${two.itemCode }"> <!-- 이건 필요해??? -->
+				<input type="hidden" name="piece" value="${two.cartPiece}"> <!-- for문 돌릴때 넣어서 셋팅하기 -->
+				<input type="hidden" name="cartId" value="${two.id}"> <!-- for문 돌릴때 넣어서 셋팅하기 -->
+			</c:forEach>
+				<div style="border-bottom: 3px solid #F2F1EB;">
+					<div>
+						<div>할인결제</div>
+						<div style="padding-bottom: 10px; display: flex; justify-content: space-between;">
+							<div>적립금</div>  
+							<div><input style="text-align: right" id="use_allPoint" type="number" value="0"/>
+							<button type="button" onclick="pointUse(event)" style="padding-left: 10px; padding-right: 10px;">전액사용</button> </div>
+						</div>
+					</div>
+					<div style="text-align: right">보유잔액 : <fmt:formatNumber value="${point.pointsum }" pattern="#,###"/>원 </div>
+					<div style="display: flex;justify-content: space-between;">
+						<div>쿠폰사용</div>
+						<div>
+							<select id="coupon" name="coupon">
+								<option value="">선택</option>
+								<c:forEach var="one" items="${couponList }">
+									<option value="${one.no }">${one.coupon.discount }%</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div style="display: flex;justify-content: flex-start">
-				<div>적립 혜택</div>
-				<div>
-				<input type="hidden" name="point" value="${(two.item.price * piece) / 100 }"/>
-				<fmt:formatNumber value="${(two.item.price * piece) / 100 }" pattern="#,###"/>
+				<div  style="border-bottom: 3px solid #F2F1EB">
+					<div>결제정보</div>
+					<div>
+						<div style="display: flex; justify-content: space-between;">
+							<div>주문상품</div>
+							<div>
+								<input type="hidden" name="price" value="${sum }" /> 
+								<fmt:formatNumber value="${sum }" pattern="#,###"/>
+							</div>
+						</div>
+						<div style="display: flex; justify-content: space-between;">
+							<div>할인결제</div>
+							<div><span id="pointDiscount">0</span></div>
+						</div>
+						<div style="display: flex;justify-content: space-between; border-top: 3px; border-bottom: 3px; border-style: dashed; border-color: #F2F1EB; border-left: none; border-right: none;margin-top: 10px; margin-bottom: 10px" >
+							<div style="display: flex; justify-content: flex-start;">
+								<div style="width: 15%"><img style="width: 100%" alt="적립금" src="${pageContext.servletContext.contextPath }/resource/image/dollar.png"></div>
+								<div>적립금</div>
+							</div>
+							<div>
+								<input id="usePoint" style="text-align:right;" type="hidden" name="point" value="${ sum / 100 }"/>
+								<fmt:formatNumber value="${ sum / 100 }" pattern="#,###"/>
+							</div>
+						</div>
+					</div>
+					<div style="background-color: #F2F1EB; display: flex; justify-content: space-between; " >
+						<div>최종결제금액</div>
+						<input type="hidden" name="sum" value="${sum }"/>
+						<div id="finalTotal"><fmt:formatNumber value="${sum }" pattern="#,###"/></div>
+					</div>
 				</div>
-			</div>
-			<button type="submit">
-				<div>
-					<fmt:formatNumber value="${two.item.price * piece }" pattern="#,###"/> 결제하기
+				<div style="margin-top: 20px; margin-bottom: 20px" class="textcenter">
+					<button type="submit">
+						<div id="fifinalTotal">
+							<fmt:formatNumber value="${sum }" pattern="#,###"/><span> 결제하기</span> 
+						</div>
+					</button>
 				</div>
-			</button>
-		</form>
+			</form>
+		</div>
 	</div>
+	<script>
+
+		var keepPoint = Number('${sum}')/100;
+		let $useAllPoint = 	document.querySelector('#use_allPoint');
+	
+		let allPoint = "<c:out value= '${point.pointsum }'/>";
+		//console.log('allPoint의 타입'+ typeof allPoint);
+		
+		let x = document.querySelector('#finalTotal').firstChild.nodeValue;
+		let x2 = x.replace(',','');
+		let y = Number(x2); // 최종결제금액 number로 변경
+		
+		//전액사용 버튼 클릭
+		function pointUse(e){
+			$useAllPoint.value = allPoint;
+			document.querySelector('#use_allPoint').dispatchEvent(new Event("change"));
+		}
+	
+		// 적립금 input change 이벤트
+		document.querySelector('#use_allPoint').addEventListener('change', function(e){
+			//console.log(e);
+			if( e.target.value != '' ){
+				let value = e.target.value; // 보유포인트전액
+				let value2 = Number(value);
+				//console.log('value의 타입'+typeof value2);
+				let minusValue = value * -1;
+				document.querySelector('#pointDiscount').firstChild.nodeValue = minusValue;
+				document.querySelector('#usePoint').nextSibling.nodeValue = minusValue;
+				document.getElementById('usePoint').value = minusValue;
+				
+				
+				// 최종결제금액 계산
+				let finaltotal = y - value2;
+				let finaltotal2 = finaltotal.toLocaleString();
+				//console.log('최종결제금액-포인트전액-->'+finaltotal2);
+				
+				document.querySelector('#finalTotal').firstChild.nodeValue = finaltotal2;
+				document.querySelector('#fifinalTotal').firstChild.nodeValue = finaltotal2;
+			} else {
+				document.querySelector('#pointDiscount').firstChild.nodeValue = '';
+				document.querySelector('#usePoint').nextSibling.nodeValue = keepPoint;
+				document.getElementById('usePoint').value = keepPoint;
+				
+				let keepPointFormat = (keepPoint * 100).toLocaleString();
+				document.querySelector('#finalTotal').firstChild.nodeValue = keepPointFormat;
+				document.querySelector('#fifinalTotal').firstChild.nodeValue = keepPointFormat;
+			}
+			
+		});
+		
+		
+		document.querySelector('#coupon').addEventListener('change', function(e){
+			
+			document.querySelector('#usePoint').nextSibling.nodeValue = 0;
+			document.getElementById('usePoint').value = 0;
+			
+			let coupon =  document.getElementById('coupon');
+			let percent = coupon.options[coupon.selectedIndex].text.replace('%','');
+			let discount = ((keepPoint * 100) * (percent / 100)) * -1;
+			document.querySelector('#pointDiscount').firstChild.nodeValue = discount;
+			
+			let finaltotal = y + discount;
+			let finaltotal2 = finaltotal.toLocaleString();
+			//console.log('최종결제금액-포인트전액-->'+finaltotal2);
+			
+			document.querySelector('#finalTotal').firstChild.nodeValue = finaltotal2;
+			document.querySelector('#fifinalTotal').firstChild.nodeValue = finaltotal2;
+		});
+	</script>
 </body>
 </html>

@@ -55,7 +55,7 @@ public class JoinController extends HttpServlet {
 		}
 
 		try {
-			User one = new User(id, password, 500000, nickName, 1);
+			User one = new User(id, password, 1000000, nickName, 1);
 			UserDao userdao = new UserDao();
 			User found = userdao.findById(id);
 
@@ -67,7 +67,7 @@ public class JoinController extends HttpServlet {
 				result = userdao.save(one);
 				Point x = new Point(0,one.getId(),"웰컴포인트!",3000,now);
 				pointdao.save(x);
-				CouponStorage y = new CouponStorage(0,one.getId(), exp, 1);
+				CouponStorage y = new CouponStorage(0,id, exp, 1);
 				coupon.save(y);
 				//request.setAttribute("one", one); //계정을 새로 만들어서 set
 				//request.getSession().setAttribute("logonUser", one);
