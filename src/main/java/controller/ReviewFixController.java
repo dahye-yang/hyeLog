@@ -67,7 +67,7 @@ public class ReviewFixController extends HttpServlet {
 			
 			reviewdao.update(one);
 			
-			response.sendRedirect(request.getServletContext().getContextPath()+"/view/detail?code="+categoryId);
+			response.sendRedirect(request.getServletContext().getContextPath()+"/view/detail?code="+itemCdoe);
 			//request.getRequestDispatcher("/WEB-INF/view/main.jsp").forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace();

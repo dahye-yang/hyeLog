@@ -29,11 +29,11 @@ table, td, tr, th {
 				<c:import url="/nav" />
 			</header>
 		</div>
-		<div style="text-align: center; margin-bottom: 20px">
-			<p style="font-size: 40px;">찜콩조회</p>
+		<div style="text-align: center; margin-bottom: 20px; margin-top: 50px;">
+			<p style="font-size: 40px;">LIKE</p>
 		</div>
 		<div>
-			<form method="post">
+			<form id="kiroko" method="post">
 				<table style="margin: auto; min-width: 80%">
 					<tr style="height: 60px">
 						<th></th>
@@ -59,10 +59,12 @@ table, td, tr, th {
 						<!-- 선택버튼 -->
 						<td style="text-align: center">	
 							<input type="hidden" name="piece" value="1"/>
-							<button type="submit" formaction="${pageContext.servletContext.contextPath }/private/order/cart">장바구니에 넣기</button><br/>
-							<input type="hidden" name="cartid" value="${one.id }"/>
+							<button type="submit" style="padding-left: 10px; padding-right: 10px"
+								onclick="addCartSubmit(${one.item.code})">장바구니에 넣기</button><br/>
+							<input type="hidden" name="cartid" value=""/> <!-- 장바구니 value 틀림 -->
 							<input type="hidden" name="itemcode" value="${one.item.code }"/>
-							<button type="submit" formaction="${pageContext.servletContext.contextPath}/private/like">삭제하기</button>
+							<input type="hidden" name="deleteNo" id="deleteNo"/>
+							<button type="button" onclick="deleteSubmit(${one.item.code})">삭제하기</button>
 						 </td>
 						<!-- 총 정보 나열?.. -->
 					</tr>
@@ -70,10 +72,20 @@ table, td, tr, th {
 			</table>
 			</form>
 		</div>
-		
-		
-		
-		
 	</div>
+	<script>
+	// 찜하기에서 삭제하기
+	function deleteSubmit(id){
+		document.getElementById("deleteNo").value =id;
+		document.getElementById("kiroko").action = "${pageContext.servletContext.contextPath}/private/likedelete";
+		document.getElementById("kiroko").submit();
+	}
+	
+	function addCartSubmit(id){
+		document.getElementById("deleteNo").value =id;
+		document.getElementById("kiroko").action = "${pageContext.servletContext.contextPath}/private/order/cart";
+		document.getElementById("kiroko").submit();
+	}
+	</script>
 </body>
 </html>

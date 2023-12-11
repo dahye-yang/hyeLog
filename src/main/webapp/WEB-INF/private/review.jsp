@@ -17,7 +17,7 @@
 				<c:import url="/nav" />
 			</header>
 		</div>
-		<div style="margin-top: 30px ;width: 70%; margin: auto; display: flex;justify-content: center;">
+		<div style="margin-top: 130px ; margin-left:160px ;width: 70%; display: flex;justify-content: center;">
 			<div style="width: 30%"><!-- 아이템사진 -->
 				<img style="width: 100%" src="${pageContext.servletContext.contextPath }${item.itemImg[0].itemimgUrl }"> 
 			</div>

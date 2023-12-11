@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,7 +10,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dao.CartDao;
+import model.dao.CouponDao;
+import model.dao.CouponStorageDao;
+import model.dao.PointDao;
 import model.vo.Cart;
+import model.vo.CouponStorage;
+import model.vo.Point;
 import model.vo.User;
 
 @WebServlet("/private/order/cartsaveforbuy")
@@ -19,6 +25,7 @@ public class CartSaveForBuyController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String piece = request.getParameter("itempiece");
+		//String piece = request.getParameter("itempiece");
 		int x = Integer.parseInt(piece);
 		String itemCode = request.getParameter("itemcode");
 		int y = Integer.parseInt(itemCode);
@@ -28,6 +35,8 @@ public class CartSaveForBuyController extends HttpServlet {
 		//System.out.println("itemcode --> "+ itemCode);
 		
 		CartDao cartDao = new CartDao();
+		PointDao pointDao = new PointDao();
+		CouponStorageDao couponStorageDao = new CouponStorageDao();
 		
 		
 		try {
@@ -50,22 +59,60 @@ public class CartSaveForBuyController extends HttpServlet {
 					one.setCartPiece(x);
 					one.setItemCode(y);
 					
-					cartDao.save(one);
+					int cartId = cartDao.save(one);
+					//카트 save 후 저장된 cartid
+					request.setAttribute("cartId", cartId);
+					String[] a = new String[] {String.valueOf(cartId)};
+					List<Cart> list = cartDao.findByUserIdAndCartId(found.getId(), a);
+					request.setAttribute("list", list);
+					int sum=0;
+					for(Cart b : list) {
+						sum = x * b.getItem().getPrice();
+						}
+					//쿠폰
+					List<CouponStorage> couponList =  couponStorageDao.findCouponByUser(found.getId());
+					request.setAttribute("couponList", couponList);
+					request.setAttribute("sum", sum);
 				}else {
 					three.setCartPiece(three.getCartPiece()+1);
 					cartDao.update(three);
+					String[] a = new String[] {String.valueOf(three.getId())};
+					List<Cart> list = cartDao.findByUserIdAndCartId(found.getId(), a);
+					request.setAttribute("list", list);
+					request.setAttribute("cartId", three.getId());
+					int sum=0;
+					for(Cart b : list) {
+						sum = x * b.getItem().getPrice();
+						}
+					request.setAttribute("sum", sum);
+					//쿠폰
+					List<CouponStorage> couponList =  couponStorageDao.findCouponByUser(found.getId());
+					
+					for(CouponStorage bb : couponList) {
+						bb.getCoupon().getAlt();
+						bb.getCoupon().getDiscount();
+						bb.getExpDate();
+					}
+					
+					request.setAttribute("couponList", couponList);
 				}
-
-				Cart two = cartDao.findByUserIdAndItemCode(found.getId(), y);
 				
-				System.out.println("구매하려고 넘어온 아이템이름--->"+two.getItem().getName());
-				System.out.println("개수-->"+two.getCartPiece());
+				
+				
+				//Cart two = cartDao.findByUserIdAndItemCode(found.getId(), y);
+				Point four = pointDao.findPointSumByUserId(found.getId());
+				System.out.println("포인트합계-->"+four.getPointsum());
+				/*
+				 * System.out.println("구매하려고 넘어온 아이템이름--->"+two.getItem().getName());
+				 * System.out.println("개수-->"+two.getCartPiece());
+				 */
+				
+				request.setAttribute("point", four);
 				request.setAttribute("found", found);
-				request.setAttribute("two", two);
+				//request.setAttribute("two", two);
 				request.setAttribute("piece", x);
-				request.setAttribute("code", y);
+				request.setAttribute("code", y); // 아이템코드
 				request.getRequestDispatcher("/WEB-INF/private/order/buy.jsp").forward(request, response);
-				//response.sendRedirect(request.getServletContext().getContextPath()+"/private/order/buy");
 				
 			}
 

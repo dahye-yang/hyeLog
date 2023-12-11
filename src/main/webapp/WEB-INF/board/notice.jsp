@@ -18,7 +18,7 @@
 				<c:import url="/nav" />
 			</header>
 			</div>
-			<div style="text-align: center; margin-bottom: 20px">
+			<div style="text-align: center; margin-bottom: 20px; margin-top: 50px">
 				<p style="font-size: 40px;">NOTICE</p>
 			</div>
 		</div>

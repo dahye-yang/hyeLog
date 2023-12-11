@@ -43,16 +43,18 @@
 					<button type="button">목록으로</button>
 				</a>
 			</div>
-			<div>
-				<a href="${pageContext.servletContext.contextPath }/board/noticefix?id=${one.id}">
-					<button type="button">수정하기</button>
-				</a>
-			</div>
-			<div>
-				<a href="${pageContext.servletContext.contextPath }/board/noticedelete?id=${one.id}">
-					<button type="button">삭제하기</button>
-				</a>
-			</div>
+			<c:if test="${found.id eq 'admin' }">
+				<div>
+					<a href="${pageContext.servletContext.contextPath }/board/noticefix?id=${one.id}">
+						<button type="button">수정하기</button>
+					</a>
+				</div>
+				<div>
+					<a href="${pageContext.servletContext.contextPath }/board/noticedelete?id=${one.id}">
+						<button type="button">삭제하기</button>
+					</a>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </body>

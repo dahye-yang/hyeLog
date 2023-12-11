@@ -45,6 +45,13 @@ table,td,tr,th{
 					</tr>
 				</c:forEach>				
 			</table>
+			<c:if test="${found.id eq 'admin' }">
+				<div style="margin : auto; min-width: 80%; text-align: right;">
+					<a href="${pageContext.servletContext.contextPath}/board/notice">
+						<button type="button">등록하기</button>				
+					</a>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </body>

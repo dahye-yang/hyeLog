@@ -23,6 +23,7 @@ public class LikeMainController extends HttpServlet {
 		
 		try {
 			List<Like> list = likedao.findAllByUserId(found.getId());
+						
 			
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/WEB-INF/private/likemain.jsp").forward(request, response);
