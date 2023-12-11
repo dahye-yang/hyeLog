@@ -24,7 +24,10 @@ public class TicketCodeCookieFilter extends HttpFilter {
 
 		try {
 			Cookie[] cookies = request.getCookies();
+			
 			Cookie founds = null;
+			
+			//만약 쿠키를 갖고 있다면, 쿠키를 찾아. 
 			if (cookies != null && cookies.length > 0) {
 				for (Cookie c : cookies) {
 					String str = c.getName();

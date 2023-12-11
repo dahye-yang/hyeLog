@@ -34,7 +34,7 @@ public class MyShopController extends HttpServlet{
 		
 			int sum = 0;
 			for(Point l : list) {
-				sum += l.getPoint();
+				sum = sum + l.getPoint();
 			}
 			request.setAttribute("sum", sum);
 			

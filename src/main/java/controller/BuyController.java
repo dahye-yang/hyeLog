@@ -67,9 +67,28 @@ public class BuyController extends HttpServlet{
 				boolean result = buylogdao.save(one);
 				System.out.println("구매로그 등록결과--->"+result);
 				found.setBalance(found.getBalance()-price2);
+				//-----------
+				found.setUseMoney(found.getUseMoney()+price2);
 				// 레벨업 조건 체크하기
 				boolean result2 = userdao.update(found);
 				System.out.println("유저 잔액변경 결과-->"+result2);
+				
+				//레벨업 과정 
+				int target = found.getUseMoney();
+				
+				if(target >=100000 && target <300000) {
+					found.setLevelId(2);
+				}else if (target >=300000 && target <700000) {
+					found.setLevelId(3);
+				}else if(target >=700000 && target <900000) {
+					found.setLevelId(4);
+				}else {
+					found.setLevelId(5);
+				}
+				
+				userdao.update(found);
+				
+				//포인트적립내역
 				Point two = new Point(0,found.getId(),"구매적립포인트!", point3, now);
 				pointdao.save(two);
 				// 장바구니에서 삭제

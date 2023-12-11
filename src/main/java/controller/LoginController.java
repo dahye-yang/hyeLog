@@ -1,18 +1,23 @@
 package controller;
 
 
+
 import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.dao.KeepTicketsDao;
 import model.dao.LoginLogDao;
 import model.dao.PointDao;
 import model.dao.UserDao;
+import model.vo.KeepTickets;
 import model.vo.LoginLog;
 import model.vo.Point;
 import model.vo.User;
@@ -39,6 +44,28 @@ public class LoginController extends HttpServlet {
 			User found = userDao.findById(loginId);
 			if (found != null && found.getPassword().equals(loginPassword)) {
 				request.getSession().setAttribute("logonUser", found);
+				
+				String code = UUID.randomUUID().toString();
+				String userId = loginId;
+				Date expired_at = new Date(System.currentTimeMillis()+ 1000L*60*60*24*24);
+				//int형식의 범위를 넘기 때문에 long타입으로 바꿔줘야함.  
+				
+				KeepTickets ticket = new KeepTickets (code, userId, expired_at);
+				
+				//데이터베이스 저장중..
+				KeepTicketsDao keepTicketProcessor = new KeepTicketsDao();
+				
+				keepTicketProcessor.save(ticket);
+				
+				//쿠키 생성및 설정
+				Cookie cookie = new Cookie("ticketCode",code);
+				cookie.setPath(request.getServletContext().getContextPath());
+				cookie.setMaxAge(60*60*24*30);
+				
+				response.addCookie(cookie);
+				
+				
+				
 
 				response.sendRedirect(request.getServletContext().getContextPath() + "/view/main");
 

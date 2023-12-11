@@ -78,8 +78,26 @@ public class BuyAllController extends HttpServlet{
 				
 				// 레벨업 조건 체크하기
 				found.setBalance(found.getBalance()-price2);
+				    //----------가격 업데이트 
+				found.setUseMoney(found.getUseMoney()+price2);
 				boolean result2 = userdao.update(found);
 				System.out.println("유저 잔액변경 결과-->"+result2);
+				
+				//레벨업 과정 
+				int target = found.getUseMoney();
+				
+				if(target >=100000 && target <300000) {
+					found.setLevelId(2);
+				}else if (target >=300000 && target <700000) {
+					found.setLevelId(3);
+				}else if(target >=700000 && target <900000) {
+					found.setLevelId(4);
+				}else {
+					found.setLevelId(5);
+				}
+				
+				userdao.update(found);
+
 				// 적립포인트 적용
 				Point two = new Point(0,found.getId(),"구매적립포인트!", point3, now);
 				pointdao.save(two);

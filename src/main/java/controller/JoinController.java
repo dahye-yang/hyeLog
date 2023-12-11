@@ -55,7 +55,7 @@ public class JoinController extends HttpServlet {
 		}
 
 		try {
-			User one = new User(id, password, 500000, nickName, 1);
+			User one = new User(id, password, 500000, nickName, 1, 0);
 			UserDao userdao = new UserDao();
 			User found = userdao.findById(id);
 
