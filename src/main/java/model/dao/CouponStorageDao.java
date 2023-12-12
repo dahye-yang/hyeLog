@@ -10,6 +10,7 @@ import java.util.List;
 
 import model.vo.Coupon;
 import model.vo.CouponStorage;
+import model.vo.User;
 
 public class CouponStorageDao {
 
@@ -38,6 +39,32 @@ public class CouponStorageDao {
 			e.printStackTrace();
 			result = false;
 		}
+		return result;
+	}
+	
+	public boolean update(CouponStorage one) throws ClassNotFoundException {
+		boolean result = false;
+
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
+				"1111");) {
+
+			String sql = "UPDATE COUPONSTORAGES SET NO=?,USER_ID=?, EXP_DATE=?, COUPON_ID=?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, one.getNo());
+			pstmt.setString(2, one.getUserId());
+			pstmt.setDate(3, one.getExpDate());
+			pstmt.setInt(4, one.getCouponId());
+			
+			int n = pstmt.executeUpdate();
+			if (n == 1) {
+				result = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return result;
 	}
 	

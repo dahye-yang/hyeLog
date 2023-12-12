@@ -89,7 +89,7 @@ public class QnaDao {
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
 				"1111");) {
 
-			String sql = "SELECT * FROM QNAS";
+			String sql = "SELECT * FROM QNAS order by id";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			ResultSet rs = pstmt.executeQuery();
@@ -122,7 +122,7 @@ public class QnaDao {
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
 				"1111");) {
 
-			String sql = "select Q.* , c.name from Qnas Q left join Qna_categorys C on Q.Qna_cate = C.id";
+			String sql = "select Q.* , c.name from Qnas Q left join Qna_categorys C on Q.Qna_cate = C.id order by Q.id";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 
 			ResultSet rs = pstmt.executeQuery();

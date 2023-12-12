@@ -18,13 +18,14 @@ public class UserDao {
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
 				"1111");) {
 
-			String sql = String.format("insert into Users values(?,?,?,?,?)");
+			String sql = String.format("insert into Users values(?,?,?,?,?,?)");
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, one.getId());
 			pstmt.setString(2, one.getPassword());
 			pstmt.setInt(3, one.getBalance());
 			pstmt.setString(4, one.getNickName());
 			pstmt.setInt(5, one.getLevelId());
+			pstmt.setInt(6, one.getUseMoney());
 
 			int n = pstmt.executeUpdate();
 
@@ -56,8 +57,10 @@ public class UserDao {
 				int balance = rs.getInt("balance");
 				String nickName = rs.getString("nickName");
 				int levelId = rs.getInt("level_Id");
+				int useMoney = rs.getInt("use_money");
+				
 
-				return new User(id, password, balance, nickName, levelId);
+				return new User(id, password, balance, nickName, levelId ,useMoney);
 			} else {
 				return null;
 			}
@@ -76,15 +79,17 @@ public class UserDao {
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
 				"1111");) {
 
-			String sql = "UPDATE USERS SET PASSWORD=?,BALANCE=?, NICKNAME=?, LEVEL_ID=? WHERE ID=?";
+			String sql = "UPDATE USERS SET PASSWORD=?,BALANCE=?, NICKNAME=?, LEVEL_ID=?, use_money=? WHERE ID=?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, one.getPassword());
 			pstmt.setInt(2, one.getBalance());
 			pstmt.setString(3, one.getNickName());
 			pstmt.setInt(4, one.getLevelId());
-			pstmt.setString(5, one.getId());
+			pstmt.setInt(5, one.getUseMoney());
+			pstmt.setString(6, one.getId());
 
 			int n = pstmt.executeUpdate();
+			System.out.println("유저 업데이트 성공했닝??-->" + n);
 			if (n == 1) {
 				result = true;
 			}

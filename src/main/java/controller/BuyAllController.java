@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,23 +14,26 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dao.BuyLogDao;
 import model.dao.CartDao;
+import model.dao.CouponStorageDao;
 import model.dao.PointDao;
 import model.dao.UserDao;
 import model.vo.BuyLog;
 import model.vo.Cart;
+import model.vo.CouponStorage;
 import model.vo.Point;
 import model.vo.User;
 
 @WebServlet("/private/order/buyall")
-public class BuyAllController extends HttpServlet{
-	
+public class BuyAllController extends HttpServlet {
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		request.getRequestDispatcher("/WEB-INF/private/order/buy.jsp").forward(request, response);
 
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 구매로그 save 성공 時 User balance update 및 point 적립
@@ -78,8 +82,54 @@ public class BuyAllController extends HttpServlet{
 				
 				// 레벨업 조건 체크하기
 				found.setBalance(found.getBalance()-price2);
+				    //----------가격 업데이트 
+				found.setUseMoney(found.getUseMoney()+price2);
 				boolean result2 = userdao.update(found);
 				System.out.println("유저 잔액변경 결과-->"+result2);
+				
+				//레벨업 과정 
+				int target = found.getUseMoney();
+				
+				int modifyLv = 1;
+				if(target >=100000 && target <300000) {
+					modifyLv=2;
+				}else if (target >=300000 && target <700000) {
+					modifyLv=3;
+				}else if(target >=700000 && target <900000) {
+					modifyLv=4;
+				}else {
+					modifyLv=5;
+				}
+				
+				int oldLevel = found.getLevelId();
+				
+				if(oldLevel != modifyLv){
+					found.setLevelId(modifyLv);
+					userdao.update(found);
+					
+					//날짜기한 2주
+					LocalDate local = LocalDate.now();
+					LocalDate aa = local.plusWeeks(2);
+					Date exp = Date.valueOf(aa);
+					 
+					//레벨업 쿠폰 주기
+					CouponStorage couponStorage = new CouponStorage(0,found.getId(),exp,5);
+					CouponStorageDao couponStorageDao = new CouponStorageDao();
+					 couponStorageDao.save(couponStorage);
+					
+				
+					response.setContentType("text/html; charset=utf-8");
+				        PrintWriter w = response.getWriter();
+				        w.write("<script>alert('" + oldLevel + "Lv ➝" + found.getLevelId() + "Lv로 레벨업했습니다. 레벨업쿠폰 지급해드렸으니 확인해 보세요:)'); location.href='"
+								+ request.getServletContext().getContextPath() + "/private/myshop';</script>");
+				    	w.flush();
+					    w.close();
+				}
+					
+				
+					
+	
+
 				// 적립포인트 적용
 				Point two = new Point(0,found.getId(),"구매적립포인트!", point3, now);
 				pointdao.save(two);
@@ -98,3 +148,5 @@ public class BuyAllController extends HttpServlet{
 		
 	}
 }
+
+
