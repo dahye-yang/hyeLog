@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link
+	href="${pageContext.servletContext.contextPath }
+			/resource/stylesheet/style.css"
+	rel="stylesheet"></link>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HyeLog</title>
@@ -26,7 +30,8 @@
 				method="post" style="width: 400px; line-height: 1.2">
 				<div style="padding: 5px">
 					<p>${found.id }님 정말 떠나시겠습니까?</p>
-					<!--<p>${found.point?? } 적립금 소멸에 대해 언급</p>  -->
+					<p>지금 떠나신다면 현재 보유중인 ${sum } Point는 사라집니다
+					
 				</div>
 				<div style="padding: 5px">
 					<div>✔️ 현재 PASSWORD</div>

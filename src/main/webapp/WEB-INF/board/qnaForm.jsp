@@ -4,6 +4,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+input{
+	border: none;
+	width : 300px;
+	margin-left : 10px;
+	
+}
+table,td,tr,th{
+	border-left:none;
+	border-right: none;
+	border-radius: 0;
+	border-bottom: 1px solid #444;
+	border-collapse: collapse;
+}
+th{
+	background-color: #e9ecef;
+}
+tr{
+	height: 60px
+}
+</style>
 <link
 	href="${pageContext.servletContext.contextPath }
 			/resource/stylesheet/style.css"

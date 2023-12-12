@@ -49,7 +49,7 @@ table,td,tr,th{
 							<td>~${one.expDate }까지</td>
 						</tr>
 					</c:forEach>
-				</table>
+			</table>
 	</div>
 </body>
 </html>

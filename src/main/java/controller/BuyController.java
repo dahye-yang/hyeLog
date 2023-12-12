@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,17 +73,20 @@ public class BuyController extends HttpServlet {
 		UserDao userdao = new UserDao();
 		PointDao pointdao = new PointDao();
 		CartDao cartDao = new CartDao();
+
 		CouponStorageDao couponStorageDao = new CouponStorageDao();
 		
 		try {
 			// user의 잔액이 0이거나 구매금액 마이너스 금액이 0이하이면...
 			if (found.getBalance() < 0 || found.getBalance() < sum2) {
+
 				response.setContentType("text/html; charset=utf-8");
 				PrintWriter w = response.getWriter();
 				w.write("<script>alert('잔액이 부족합니다.😥\\n잔액충전을 해주세요.🥰');history.go(-1);</script>");
 				w.flush();
 				w.close();
 			} else {
+
 				List<Cart> list = cartDao.findByUserIdAndCartId(found.getId(), cartIds);
 				List<Integer> prices = new ArrayList<Integer>();
 				System.out.println("Integer는 몇갯!!!-->"+prices.size());
@@ -123,6 +127,51 @@ public class BuyController extends HttpServlet {
 				}
 				boolean result4 = couponStorageDao.deletByNo(Integer.parseInt(coupon));
 				System.out.println("쿠폰사용후 삭제여부---?"+result4);
+				
+				// -----------
+				found.setUseMoney(found.getUseMoney() + sum2);
+				// 레벨업 조건 체크하기
+				boolean result7 = userdao.update(found);
+				System.out.println("유저 잔액변경 결과-->" + result7);
+
+				// 레벨업 과정
+				int target = found.getUseMoney();
+
+				int modifyLv = 1;
+				if (target >= 100000 && target < 300000) {
+					modifyLv = 2;
+				} else if (target >= 300000 && target < 700000) {
+					modifyLv = 3;
+				} else if (target >= 700000 && target < 900000) {
+					modifyLv = 4;
+				} else {
+					modifyLv = 5;
+				}
+
+				int oldLevel = found.getLevelId();
+
+				if (oldLevel != modifyLv) {
+					found.setLevelId(modifyLv);
+					userdao.update(found);
+					
+					//날짜기한 2주
+					LocalDate local = LocalDate.now();
+					LocalDate aa = local.plusWeeks(2);
+					Date exp = Date.valueOf(aa);
+					 
+					//레벨업 쿠폰 주기
+					CouponStorage couponStorage = new CouponStorage(0,found.getId(),exp,5);
+					 couponStorageDao.save(couponStorage);
+					
+					couponStorageDao.findCouponByUser(found.getId());
+			
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter w = response.getWriter();
+					w.write("<script>alert('" + oldLevel + "Lv ➝" + found.getLevelId() + "Lv로 레벨업했습니다. 레벨업쿠폰 지급해드렸으니 확인해 보세요:)'); location.href='"
+							+ request.getServletContext().getContextPath() + "/private/myshop';</script>");
+					w.flush();
+					w.close();
+				}
 				response.sendRedirect(request.getServletContext().getContextPath() + "/view/main");
 
 			}

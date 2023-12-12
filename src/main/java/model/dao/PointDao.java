@@ -49,6 +49,7 @@ public class PointDao {
 				"1111");) {
 
 			String sql = "UPDATE USERS SET POINTS_SEQ.NEXTVAL, ALT=?, POINT=?, POINT_DATE=? WHERE USER_ID=?";
+
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, one.getAlt());
 			pstmt.setInt(2, one.getPoint());
@@ -153,7 +154,6 @@ public class PointDao {
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
 }

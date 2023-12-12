@@ -94,10 +94,11 @@
 			<img src="${pageContext.servletContext.contextPath }${sessionScope.logonUser.level.levelImg }" style="width: 30px;" /> ${logonUser.nickName } 님, 안녕하세요			
 		</h2>
 
-		<div>당신의 현재 등급은 <b> ${logonUser.levelId }LV </b> 입니다.🤍</div>
-	
-		<p>
-
+		<div >
+			<div>당신의 현재 등급은 <b> ${logonUser.levelId }LV </b> 입니다.🤍</div>
+			<div>보유쿠폰 개수 : <b> ${count } 개 </b> </div>
+			<div>현재 Point : <b> ${sum } Point </b> </div>
+		</div>
 		</div>
  		<div class="box2"><a href="${pageContext.servletContext.contextPath }/private/changeUser"> 회원정보 수정하기 </a></div>
 	</div>
