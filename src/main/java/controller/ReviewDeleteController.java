@@ -17,7 +17,7 @@ public class ReviewDeleteController extends HttpServlet{
 		// 리뷰 삭제기능
 		String id = request.getParameter("reviewId");
 		int x = Integer.parseInt(id);
-		String categoryId = request.getParameter("categoryId");
+		String code = request.getParameter("code");
 		
 		ReviewDao reviewdao = new ReviewDao();
 		
@@ -25,7 +25,7 @@ public class ReviewDeleteController extends HttpServlet{
 
 			reviewdao.deletById(x);
 			
-			response.sendRedirect(request.getServletContext().getContextPath()+"/view/detail?code="+categoryId);
+			response.sendRedirect(request.getServletContext().getContextPath()+"/view/detail?code="+code);
 			//request.getRequestDispatcher("/WEB-INF/private/reviewdelete.jsp").forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace();

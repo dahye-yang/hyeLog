@@ -48,7 +48,8 @@ public class PointDao {
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
 				"1111");) {
 
-			String sql = "UPDATE USERS SET POINTS_SEQ.NEXTVAL, ALT=?, NICKNAME=?, POINT=?, POINT_DATE=? WHERE USER_ID=?";
+			String sql = "UPDATE USERS SET POINTS_SEQ.NEXTVAL, ALT=?, POINT=?, POINT_DATE=? WHERE USER_ID=?";
+
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, one.getAlt());
 			pstmt.setInt(2, one.getPoint());
@@ -123,6 +124,32 @@ public class PointDao {
 				list.add(p);
 			}
 			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Point findPointSumByUserId(String idKey) throws ClassNotFoundException {
+
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+
+		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
+				"1111");) {
+
+			String sql = "SELECT sum(point) as pointsum FROM POINTS WHERE USER_ID = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, idKey);
+
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				int pointsum = rs.getInt("pointsum"); 
+
+				return new Point(pointsum);
+			} else {
+				return null;
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

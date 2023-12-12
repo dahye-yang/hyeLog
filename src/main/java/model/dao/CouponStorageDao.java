@@ -103,7 +103,31 @@ public class CouponStorageDao {
 			return null;
 		}
 	}
+	
+	public boolean deletByNo(int no) throws ClassNotFoundException {
+		boolean result = false;
+		Class.forName("oracle.jdbc.driver.OracleDriver");
 
+		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.199.133:1521:xe", "hyelog",
+				"1111");) {
+
+			String sql = "DELETE FROM Coupon_Storages WHERE no = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+
+			int n = pstmt.executeUpdate();
+
+			if (n == 1) {
+				result = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		return result;
 	}
+
+}
 
 	

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.dao.NoticeDao;
 import model.vo.Notice;
+import model.vo.User;
 
 @WebServlet("/view/noticedetail")
 public class NoticeDetailController extends HttpServlet {
@@ -19,10 +20,12 @@ public class NoticeDetailController extends HttpServlet {
 		String noticeId = request.getParameter("id");
 		int x = Integer.parseInt(noticeId);
 		NoticeDao noticedao = new NoticeDao();
+		User found = (User)request.getSession().getAttribute("logonUser");
 		
 		try {
 			Notice one = noticedao.findById(x);
 			
+			request.setAttribute("found", found);
 			request.setAttribute("one", one);
 			request.getRequestDispatcher("/WEB-INF/view/noticedetail.jsp").forward(request, response);
 		}catch (Exception e) {

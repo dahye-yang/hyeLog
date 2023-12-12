@@ -25,6 +25,7 @@ public class ItemDetailController extends HttpServlet {
 
 		User found = (User) request.getSession().getAttribute("logonUser");
 		String code = request.getParameter("code"); // item 클릭시 넘겨주는 item.code
+
 		int x = Integer.parseInt(code);
 		
 		ItemDao itemdao = new ItemDao();
@@ -42,6 +43,7 @@ public class ItemDetailController extends HttpServlet {
 		
 			// 넘겨받은 item.code로 이미지/상세내용/가격 등
 			Item item = itemdao.findByCode(x);
+			
 
 			// 리뷰가지고 오기
 			List<Review> reviewlist = reviewdao.findByItemCode(code);

@@ -8,6 +8,7 @@ public class Point {
 	private String alt;
 	private int point;
 	private Date pointDate;
+	private int pointsum;
 	
 	public Point() {
 		super();
@@ -20,6 +21,13 @@ public class Point {
 		this.alt = alt;
 		this.point = point;
 		this.pointDate = pointDate;
+	}
+	
+	
+
+	public Point(int pointsum) {
+		super();
+		this.pointsum = pointsum;
 	}
 
 	public int getNo() {
@@ -60,6 +68,14 @@ public class Point {
 
 	public void setPointDate(Date pointDate) {
 		this.pointDate = pointDate;
+	}
+
+	public int getPointsum() {
+		return pointsum;
+	}
+
+	public void setPointsum(int pointsum) {
+		this.pointsum = pointsum;
 	}
 	
 	

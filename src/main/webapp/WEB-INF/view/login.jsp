@@ -21,12 +21,11 @@
 			<div style="width: 360px; text-align: center; margin: auto">
 				<h2>Login - hyelog</h2>
 			</div>
-			
 			<div>
-					<c:if test="${error }">
-						<div style="background-color: red">
-						아이디 또는 비밀번호가 일치하지 않습니다.</div>
-					</c:if>
+				<c:if test="${error }">
+					<div style="background-color: red">
+					아이디 또는 비밀번호가 일치하지 않습니다.</div>
+				</c:if>
 			</div>
 			
 			<div style="width: 360px; text-align: center; margin: auto">

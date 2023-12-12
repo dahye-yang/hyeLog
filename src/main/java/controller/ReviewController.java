@@ -21,6 +21,7 @@ public class ReviewController extends HttpServlet {
 		
 		User found = (User)request.getSession().getAttribute("logonUser");
 		String code = request.getParameter("code");
+		System.out.println("리뷰로 넘어오는 코드-->"+code);
 		int x = Integer.parseInt(code);
 		String categoryId = request.getParameter("categoryId");
 		ItemDao itemdao = new ItemDao();
@@ -30,8 +31,8 @@ public class ReviewController extends HttpServlet {
 			
 			request.setAttribute("item", item);
 			request.setAttribute("found", found);
-			response.sendRedirect(request.getServletContext().getContextPath()+"/view/detail?code="+categoryId);
-			//request.getRequestDispatcher("/WEB-INF/private/review.jsp").forward(request, response);
+			//response.sendRedirect(request.getServletContext().getContextPath()+"/view/detail?code="+categoryId);
+			request.getRequestDispatcher("/WEB-INF/private/review.jsp").forward(request, response);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -63,7 +64,7 @@ public class ReviewController extends HttpServlet {
 			one.setItemCode(x);
 			
 			reviewdao.save(one);
-			response.sendRedirect(request.getServletContext().getContextPath()+"/view/main");
+			response.sendRedirect(request.getServletContext().getContextPath()+"/view/detail?code="+code);
 			//request.getRequestDispatcher("/WEB-INF/private/review.jsp").forward(request, response);
 			
 		} catch (Exception e) {

@@ -26,7 +26,7 @@
 					src="${pageContext.servletContext.contextPath }${item.itemImg[0].itemimgUrl}">
 			</div>
 			<form action="${pageContext.servletContext.contextPath }/private/order/cart">
-				<div style="text-align: left; padding-left: 88px">
+				<div style="text-align: left; padding-left: 88px;">
 					<div style="margin-bottom: 20px">
 						<b>${item.name }</b>
 					</div>
@@ -119,7 +119,7 @@
 										</form>
 										<form action="${pageContext.servletContext.contextPath }/private/reviewdelete" style="display: inline;">
 											<input type="hidden" name = "reviewId" value="${one.id }"> <!-- 리뷰삭제를 위한 리뷰아이디 -->
-											<input type="hidden" name = "categoryId" value="${item.categoryId }"> <!-- 삭제후 해당 상세페이지로 가기 위한 카테고리아이디 -->
+											<input type="hidden" name = "code" value="${item.code }"> <!-- 삭제후 해당 상세페이지로 가기 위한 카테고리아이디 -->
 											<button type="submit">삭제하기</button>
 										</form>
 								</c:if>
@@ -191,10 +191,6 @@
 			
 		});
 		
-		document.querySelector('#like').addEventListener('click', function(e){
-			window.alert("찜콩하기에 담아 뒀어요 :)");
-			
-		});
 	</script>
 </body>
 </html>
