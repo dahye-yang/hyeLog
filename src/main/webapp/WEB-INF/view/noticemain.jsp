@@ -40,18 +40,19 @@ table,td,tr,th{
 				<c:forEach var="one" items="${noticelist }">
 					<tr style="height:60px">
 						<td class="textcenter">${one.id }</td>				
-						<td onclick="location.href='${pageContext.servletContext.contextPath}/view/noticedetail?id=${one.id }'">${one.title}</td>
+						<td onclick="location.href='${pageContext.servletContext.contextPath}/view/noticedetail?id=${one.id }'">
+							<span style="padding-left: 30px">${one.title}</span></td>
 						<td class="textcenter">HYELOG</td>
 					</tr>
 				</c:forEach>				
-			</table>
-			<c:if test="${found.id eq 'admin' }">
-				<div style="margin : auto; min-width: 80%; text-align: right;">
+			</table>			
+			<div style="margin-left: 134px; margin-right: 134px; margin-top: 5px; text-align: right">
+				<c:if test="${found.id eq 'admin' }">
 					<a href="${pageContext.servletContext.contextPath}/board/notice">
 						<button type="button">등록하기</button>				
 					</a>
-				</div>
-			</c:if>
+				</c:if>
+			</div>
 		</div>
 	</div>
 </body>

@@ -44,7 +44,7 @@ table,td,tr,th{
 					<c:forEach var="one" items="${list }">
 						<tr style="height:60px">
 							<td style="text-align: center; width:5%">${one.id }</td>
-							<td style="width: 18%;">${one.item.name }</td>
+							<td style="width: 20%;">${one.item.name }</td>
 							<td>${one.message }</td>
 							<td style="width: 20%;">
 								<c:forEach begin="1" end="${one.score }">
