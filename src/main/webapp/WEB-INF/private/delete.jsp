@@ -35,7 +35,7 @@
 				</div>
 				<div style="padding: 5px">
 					<div>✔️ 현재 PASSWORD</div>
-					<input class="width100" type="password" name="deletepassword" />
+					<input style="border-bottom: 1px solid #444; width:100%" class="width100" type="password" name="deletepassword" />
 				</div>
 				<div style="text-align: center">
 					<button style="width: 150px" type="submit">회원탈퇴</button>

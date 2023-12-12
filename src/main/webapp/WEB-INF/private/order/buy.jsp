@@ -34,7 +34,7 @@
 				<div style="font-size: 40px; text-align: center">주문/결제</div>
 			</div>
 			<div style="border-bottom: 3px solid #F2F1EB">
-				<div>주문정보</div>
+				<div><b style="font-size: 30px">주문정보</b></div>
 				<div>주문자 : ${found.nickName } </div>
 			</div>
 			<c:forEach var="one" items="${list }">
@@ -57,7 +57,7 @@
 			</c:forEach>
 				<div style="border-bottom: 3px solid #F2F1EB;">
 					<div>
-						<div>할인결제</div>
+						<div><b style="font-size: 30px">할인결제</b></div>
 						<div style="padding-bottom: 10px; display: flex; justify-content: space-between;">
 							<div>적립금</div>  
 							<div><input style="text-align: right" id="use_allPoint" type="number" value="0"/>
@@ -78,7 +78,7 @@
 					</div>
 				</div>
 				<div  style="border-bottom: 3px solid #F2F1EB">
-					<div>결제정보</div>
+					<div><b style="font-size: 30px">결제정보</b></div>
 					<div>
 						<div style="display: flex; justify-content: space-between;">
 							<div>주문상품</div>
@@ -170,21 +170,34 @@
 		
 		
 		document.querySelector('#coupon').addEventListener('change', function(e){
+				let coupon =  document.getElementById('coupon');
+				
+				if(coupon.options[coupon.selectedIndex].text !== '선택'){
+					console.log(coupon.options[coupon.selectedIndex].text !== '선택');
+				document.querySelector('#usePoint').nextSibling.nodeValue = 0;
+				document.getElementById('usePoint').value = 0;
+				
+				let percent = coupon.options[coupon.selectedIndex].text.replace('%','');
+				let discount = ((keepPoint * 100) * (percent / 100)) * -1;
+				document.querySelector('#pointDiscount').firstChild.nodeValue = discount;
+				
+				let finaltotal = y + discount;
+				let finaltotal2 = finaltotal.toLocaleString();
+				//console.log('최종결제금액-포인트전액-->'+finaltotal2);
+				
+				document.querySelector('#finalTotal').firstChild.nodeValue = finaltotal2;
+				document.querySelector('#fifinalTotal').firstChild.nodeValue = finaltotal2;
+			}else{
+				//선택일 경우에는 할인결제와, 최종결제금액, 결제하기버튼 금액 조정
+				document.querySelector('#pointDiscount').firstChild.nodeValue = 0;
+				
+				let keepPointFormat = (keepPoint * 100).toLocaleString();
+				document.querySelector('#finalTotal').firstChild.nodeValue = keepPointFormat;
+				document.querySelector('#fifinalTotal').firstChild.nodeValue = keepPointFormat;
+				
+			}
 			
-			document.querySelector('#usePoint').nextSibling.nodeValue = 0;
-			document.getElementById('usePoint').value = 0;
 			
-			let coupon =  document.getElementById('coupon');
-			let percent = coupon.options[coupon.selectedIndex].text.replace('%','');
-			let discount = ((keepPoint * 100) * (percent / 100)) * -1;
-			document.querySelector('#pointDiscount').firstChild.nodeValue = discount;
-			
-			let finaltotal = y + discount;
-			let finaltotal2 = finaltotal.toLocaleString();
-			//console.log('최종결제금액-포인트전액-->'+finaltotal2);
-			
-			document.querySelector('#finalTotal').firstChild.nodeValue = finaltotal2;
-			document.querySelector('#fifinalTotal').firstChild.nodeValue = finaltotal2;
 		});
 	</script>
 </body>

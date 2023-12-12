@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 			</header>
 		</div>
 	
-		<div style="text-align: center; margin-bottom: 20px">
+		<div style="text-align: center; margin-bottom: 20px; margin-top: 50px">
 			<p style="font-size: 40px;">구매내역조회</p>
 		</div>
 		
@@ -37,16 +38,16 @@
 				</tr>
 				<c:forEach var="one" items="${list }">
 					<tr style="height: 60px">
-						<td>${one.buyDate}</td>
-						<td>${one.id}</td>
-						<td><img style="width: 100px; height: 100px" src="${pageContext.servletContext.contextPath }${one.item.image } "></td>
+						<td style="text-align: center">${one.buyDate}</td>
+						<td style="text-align: center">${one.id}</td>
+						<td style="text-align: center"><img style="width: 100px; height: 100px" src="${pageContext.servletContext.contextPath }${one.item.image } "></td>
 						<td>${one.item.name }</td>
-						<td>${one.piece }</td>
-						<td>${one.price} </td>
+						<td style="text-align: center">${one.piece }</td>
+						<td style="text-align: center"><fmt:formatNumber value="${one.price}" pattern="#,###"/> </td>
 					<tr>
 				</c:forEach>
 					<tr>
-						<td colspan="7"> 총 합계 : ${sum }</td>
+						<td colspan="7"> 총 합계 : <fmt:formatNumber value="${sum }" pattern="#,###"/>원 </td>
 					</tr>
 			</table>
 	

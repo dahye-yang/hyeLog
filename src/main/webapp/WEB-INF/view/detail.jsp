@@ -73,59 +73,61 @@
 					</c:forEach>
 				</div>
 			</div>
-			<div>
+			<div  style="width:80%; margin:auto; ">
 				<div style="text-align: center; margin-bottom: 20px">
 					<p style="font-size: 40px;">REVIEW</p>
 				</div>
-				<div style="text-align: right; padding-bottom: 20px">
-					<c:choose>
-						<c:when test="${found ne null }">
-							<a
-								href="${pageContext.servletContext.contextPath }/private/review?code=${item.code}">
-								<button type="button">리뷰작성</button>
-							</a>
-						</c:when>
-						<c:otherwise>
-							<a href="#" onclick="return false;">
-								<button type="button">리뷰작성</button>
-							</a>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<hr />
-				<div style="width:85vw; margin:auto; ">
-					<c:forEach var="one" items="${reviewlist }">
-						<div style="padding:20px; border-bottom: 1px solid #444">
-							<div>						
-								<div style="display: flex; justify-content: space-between; align-items: center">
-									<div>
-										<c:forEach begin="1" end="${one.score }">
-											⭐
-										</c:forEach>
+				<div>
+					<div style="text-align: right; padding-bottom: 20px">
+						<c:choose>
+							<c:when test="${found ne null }">
+								<a
+									href="${pageContext.servletContext.contextPath }/private/review?code=${item.code}">
+									<button type="button">리뷰작성</button>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<a href="#" onclick="return false;">
+									<button type="button">리뷰작성</button>
+								</a>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<hr />
+					<div>
+						<c:forEach var="one" items="${reviewlist }">
+							<div style="padding:20px; border-bottom: 1px solid #444">
+								<div>						
+									<div style="display: flex; justify-content: space-between; align-items: center">
+										<div>
+											<c:forEach begin="1" end="${one.score }">
+												⭐
+											</c:forEach>
+										</div>
+										<div style="text-align: right;">작성자 : ${one.writer }</div>
 									</div>
-									<div style="text-align: right;">작성자 : ${one.writer }</div>
+									<div></div>
+									<div>${one.message }</div>
 								</div>
-								<div></div>
-								<div>${one.message }</div>
+								<div style="text-align: right;">
+									<c:if test="${found.id eq one.writer }">
+											<form action="${pageContext.servletContext.contextPath }/private/reviewfix" style="display: inline;">
+												<input type="hidden" name = "writer" value="${found.id }">
+												<input type="hidden" name = "reviewId" value="${one.id }">
+												<input type="hidden" name = "categoryId" value="${item.categoryId }">
+												<input type="hidden" name = "code" value="${item.code }">
+												<button type="submit">수정하기</button>
+											</form>
+											<form action="${pageContext.servletContext.contextPath }/private/reviewdelete" style="display: inline;">
+												<input type="hidden" name = "reviewId" value="${one.id }"> <!-- 리뷰삭제를 위한 리뷰아이디 -->
+												<input type="hidden" name = "code" value="${item.code }"> <!-- 삭제후 해당 상세페이지로 가기 위한 카테고리아이디 -->
+												<button type="submit">삭제하기</button>
+											</form>
+									</c:if>
+								</div>
 							</div>
-							<div style="text-align: right;">
-								<c:if test="${found.id eq one.writer }">
-										<form action="${pageContext.servletContext.contextPath }/private/reviewfix" style="display: inline;">
-											<input type="hidden" name = "writer" value="${found.id }">
-											<input type="hidden" name = "reviewId" value="${one.id }">
-											<input type="hidden" name = "categoryId" value="${item.categoryId }">
-											<input type="hidden" name = "code" value="${item.code }">
-											<button type="submit">수정하기</button>
-										</form>
-										<form action="${pageContext.servletContext.contextPath }/private/reviewdelete" style="display: inline;">
-											<input type="hidden" name = "reviewId" value="${one.id }"> <!-- 리뷰삭제를 위한 리뷰아이디 -->
-											<input type="hidden" name = "code" value="${item.code }"> <!-- 삭제후 해당 상세페이지로 가기 위한 카테고리아이디 -->
-											<button type="submit">삭제하기</button>
-										</form>
-								</c:if>
-							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>
