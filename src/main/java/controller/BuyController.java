@@ -39,13 +39,14 @@ public class BuyController extends HttpServlet {
 			throws ServletException, IOException {
 		
 		String coupon = request.getParameter("coupon");
+		System.out.println("coupon 선택안하면 넘어오는 거--->"+coupon);
 
 		String[] itemcodes = request.getParameterValues("itemcode");
 	//	System.out.println("아이템코드 배열사이트 -->" + itemcodes.length);
 		String[] pieces = request.getParameterValues("piece");
 	//	System.out.println("piece 배열사이트 -->" + pieces.length);
 		String[] cartIds = request.getParameterValues("cartId");
-		System.out.println("cartId 배열사이트 -->" + cartIds.length);
+		//System.out.println("cartId 배열사이트 -->" + cartIds.length);
 		
 		// 구매총액
 		String sum = request.getParameter("sum"); 
@@ -57,10 +58,10 @@ public class BuyController extends HttpServlet {
 //		System.out.println("넘어온 price-->" + price);
 		String point = request.getParameter("point");
 		int point3 = 0;
-		if(Integer.parseInt(point) != 0) {
+		if(point != "") {
 			double point2 = Double.valueOf(point);
 			point3 = (int) point2;	
-			System.out.println("포인트는----??"+point3);
+			//System.out.println("포인트는----??"+point3);
 		}
 //		//구매완료 후 장바구니에서 삭제
 //		String cartId = request.getParameter("cartId");
@@ -91,6 +92,7 @@ public class BuyController extends HttpServlet {
 				List<Integer> prices = new ArrayList<Integer>();
 				System.out.println("Integer는 몇갯!!!-->"+prices.size());
 				
+				//구매로그에 찍기위한 각 개수*금액
 				for(Cart g : list) {
 					prices.add(g.getCartPiece()*g.getItem().getPrice());
 				}
@@ -125,8 +127,11 @@ public class BuyController extends HttpServlet {
 					// 주문조회 만든 후 그곳으로 이동하도록 바꾸기
 					
 				}
-				boolean result4 = couponStorageDao.deletByNo(Integer.parseInt(coupon));
-				System.out.println("쿠폰사용후 삭제여부---?"+result4);
+				
+				if(!coupon.equals("")) {
+					boolean result4 = couponStorageDao.deletByNo(Integer.parseInt(coupon));
+					System.out.println("쿠폰사용후 삭제여부---?"+result4);					
+				}
 				
 				// -----------
 				found.setUseMoney(found.getUseMoney() + sum2);
@@ -171,8 +176,10 @@ public class BuyController extends HttpServlet {
 							+ request.getServletContext().getContextPath() + "/private/myshop';</script>");
 					w.flush();
 					w.close();
+				}else {
+					
+					response.sendRedirect(request.getServletContext().getContextPath() + "/view/main");
 				}
-				response.sendRedirect(request.getServletContext().getContextPath() + "/view/main");
 
 			}
 

@@ -41,7 +41,7 @@ tr{
 				<c:import url="/nav" />
 			</header>
 		</div>
-		<div style="margin-top: 50px">
+		<div style="margin-top: 50px; width: 70%;">
 			<h2>Q&A작성</h2>
 			<form action="${pageContext.servletContext.contextPath }/board/qnaForm"
 				method="post">
@@ -87,8 +87,8 @@ tr{
 					</tr>
 		
 				</table>
-				<button>등록</button>
-				<button type="reset">취소</button>
+				<button style="margin-top: 10px">등록</button>
+				<button style="margin-top: 10px" type="reset">취소</button>
 		
 			</form>
 		</div>

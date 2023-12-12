@@ -83,12 +83,14 @@
 <body>
 	<div class="wrap align-center">
 		<div>
-			<c:import url="/nav" />
+			<header style="background-color: #F2F1EB">
+				<c:import url="/nav" />
+			</header>
 		</div>
 
 		<br>
 		
-		<div class="wrapper1">
+		<div class="wrapper1" style="margin-top: 30px">
   		<div class="box1">
 		<h2>
 			<img src="${pageContext.servletContext.contextPath }${sessionScope.logonUser.level.levelImg }" style="width: 30px;" /> ${logonUser.nickName } 님, 안녕하세요			
@@ -100,60 +102,37 @@
 			<div>현재 Point : <b> ${sum } Point </b> </div>
 		</div>
 		</div>
- 		<div class="box2"><a href="${pageContext.servletContext.contextPath }/private/changeUser"> 회원정보 수정하기 </a></div>
-	</div>
+ 			<div class="box2"><a href="${pageContext.servletContext.contextPath }/private/changeUser"> 회원정보 수정하기 </a></div>
+		</div>
 	<br>
-	
-		
-		
-		
-		
-		
-		
-		<div class="wrapper2">
-		  <div class="box1">
+		<div style="display: flex; justify-content: flex-start; gap : 200px; border: 1px solid #88AB8E; margin-left: 50px; margin-right: 50px ">
 		  	<p class="align-center">  
-		  	<a href="${pageContext.servletContext.contextPath }/private/delete">
-			<div class="wrapper3">
-			<div class="b1"><img src="${pageContext.servletContext.contextPath }/resource/image/user.png" style="width: 40px"/></div>
-			<div class="b2">회원탈퇴</div>
+		  	<div>
+			  	<a href="${pageContext.servletContext.contextPath }/private/delete">
+					<div class="b1"><img src="${pageContext.servletContext.contextPath }/resource/image/user.png" style="width: 40px"/></div>
+					<div class="b2">회원탈퇴</div>
+				</a>	  
 			</div>
-		</a>		
+			<div>
+			  	<a href="${pageContext.servletContext.contextPath }/private/myshop/coupon">
+					<div class="b1"> <img src="${pageContext.servletContext.contextPath }/resource/image/coupon.png" style="width: 40px" /></div>
+					<div class="b2"> 쿠폰 확인</div>	
+				</a>		
+		  	</div>
+		  	<div>
+			  	 <a href="${pageContext.servletContext.contextPath }/private/myshop/point">
+					<div class="b1"> <img src="${pageContext.servletContext.contextPath }/resource/image/dollar.png" style="width: 40px" /></div>
+					<div class="b2"> 적립금 확인</div>
+				</a>		
+		  	</div>
+		  	<div>
+			  	 <a href="${pageContext.servletContext.contextPath }/private/myshop/orderlist">
+					<div class="b1"> <img src="${pageContext.servletContext.contextPath }/resource/image/order.png" style="width: 40px" /></div>
+					<div class="b2"> 주문조회 </div>
+				</a>		
 		  </div>
-		  
-
-		  <div class="box2">		  
-		  	<a href="${pageContext.servletContext.contextPath }/private/myshop/coupon">
-			<div class="wrapper3">
-			<div class="b1"> <img src="${pageContext.servletContext.contextPath }/resource/image/coupon.png" style="width: 40px" /></div>
-			<div class="b2"> 쿠폰 확인</div>
-			</div>
-			</a>		
-		  </div>
-		    
-		  
-		  <div class="box3">
-		  	 <a href="${pageContext.servletContext.contextPath }/private/myshop/point">
-			<div class="wrapper3">
-			<div class="b1"> <img src="${pageContext.servletContext.contextPath }/resource/image/dollar.png" style="width: 40px" /></div>
-			<div class="b2"> 적립금 확인</div>
-			</div>
-			</a>		
-		  </div>
-		  
-
-		 <div class="box4">
-		  	 <a href="${pageContext.servletContext.contextPath }/private/myshop/orderlist">
-			<div class="wrapper3">
-			<div class="b1"> <img src="${pageContext.servletContext.contextPath }/resource/image/order.png" style="width: 40px" /></div>
-			<div class="b2"> 주문조회 </div>
 		</div>
-			</a>		
-		  </div>
-   
-		  </div>
-
-		</div>
+	</div>
 		
 </body>
 </html>

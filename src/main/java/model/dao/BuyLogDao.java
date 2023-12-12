@@ -119,7 +119,7 @@ public class BuyLogDao {
 					+ "on c.item_code= i.code where user_id = ?) a join (select ROW_NUMBER() OVER(PARTITION BY c.code ORDER BY c.code) as num, c.* "
 					+ "from item_imgs c) b "
 					+ "on a.item_code = b.code "
-					+ "and b.num = 1";
+					+ "and b.num = 1 order by a.id desc ";
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userid);
